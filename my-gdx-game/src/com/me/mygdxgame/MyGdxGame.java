@@ -17,8 +17,8 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 
 public class MyGdxGame implements ApplicationListener {
-	Vector2 gravity = new Vector2(0f, -100f);
-	World world = new World(gravity, true);
+	Vector2 gravity;
+	World world;
 	Box2DDebugRenderer debugRenderer;
 	OrthographicCamera camera;
 	static final float BOX_STEP = 1 / 60f;
@@ -34,7 +34,10 @@ public class MyGdxGame implements ApplicationListener {
 
 	@Override
 	public void create() {
-
+		//Create World
+		gravity = new Vector2(0f, -100f);
+		world = new World(gravity, true);
+		
 		// Camera settings
 		camera = new OrthographicCamera();
 		camera.viewportHeight = 240;
@@ -43,14 +46,7 @@ public class MyGdxGame implements ApplicationListener {
 				camera.viewportHeight * .5f, 0f);
 		camera.update();
 
-		// Ground body
-		BodyDef groundBodyDef = new BodyDef();
-		groundBodyDef.position.set(new Vector2(0, 10));
-		Body groundBody = world.createBody(groundBodyDef);
-		PolygonShape groundBox = new PolygonShape();
-		groundBox.setAsBox((camera.viewportWidth) * 2, 10.0f);
-		groundBody.createFixture(groundBox, 0.0f);
-
+		//Circle
 		circle = new BodyDef();
 		circle.type = BodyType.DynamicBody;
 		circle.position.set(camera.viewportWidth / 2,
@@ -67,28 +63,26 @@ public class MyGdxGame implements ApplicationListener {
 		circleBody.createFixture(fixtureDef);
 		debugRenderer = new Box2DDebugRenderer();
 
+		//Ground body  
+        BodyDef groundBodyDef =new BodyDef();  
+        groundBodyDef.position.set(new Vector2(0, 10));  
+        Body groundBody = world.createBody(groundBodyDef);  
+        PolygonShape groundBox = new PolygonShape();  
+        groundBox.setAsBox((camera.viewportWidth) * 2, 10.0f);  
+        groundBody.createFixture(groundBox, 0.0f);  
+		
 		//MouseJoint
 		MouseJointDef mouseJointDef = new MouseJointDef();
-		
-		mouseJointDef.bodyA = groundBody;
-
 		currentBody = circleBody;
 		
+		mouseJointDef.bodyA = groundBody;
 		mouseJointDef.bodyB = currentBody;
-
-		Vector2 worldCenter = new Vector2(camera.viewportWidth / 2,
-				camera.viewportHeight / 2);
-		
-		Vector2 bodypos = worldCenter;
-
-		mouseJointDef.target.set(bodypos.x, bodypos.y);
-
+		mouseJointDef.target.set(circleBody.getPosition());
 		mouseJointDef.collideConnected = true;
-
-		
 		mouseJointDef.maxForce = 300 * currentBody.getMass();
-
+		
 		mousejoint = (MouseJoint) world.createJoint(mouseJointDef);
+		
 	}
 
 	@Override
@@ -102,8 +96,11 @@ public class MyGdxGame implements ApplicationListener {
 		// Escuta o clique do TouchPad
 		if (Gdx.input.isTouched()) {
 			//MouseJoint
-			currentMousePosition = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+			float x = Gdx.input.getX();
+			float y = Gdx.input.getY();
+			currentMousePosition = new Vector2(x, y);
 			mousejoint.setTarget(currentMousePosition);
+			System.out.println(Gdx.input.getX() + ", " + Gdx.input.getY());
 		}
 
 		
