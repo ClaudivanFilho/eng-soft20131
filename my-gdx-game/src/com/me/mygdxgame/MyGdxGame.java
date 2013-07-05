@@ -40,8 +40,8 @@ public class MyGdxGame implements ApplicationListener {
 		
 		// Camera settings
 		camera = new OrthographicCamera();
-		camera.viewportHeight = 240;
-		camera.viewportWidth = 432;
+		camera.viewportHeight = 320;
+		camera.viewportWidth = 480;
 		camera.position.set(camera.viewportWidth * .5f,
 				camera.viewportHeight * .5f, 0f);
 		camera.update();
@@ -98,13 +98,11 @@ public class MyGdxGame implements ApplicationListener {
 			//MouseJoint
 			float x = Gdx.input.getX();
 			float y = Gdx.input.getY();
-			currentMousePosition = new Vector2(x, y);
+			currentMousePosition = new Vector2(x, Math.abs(y - camera.viewportHeight));
 			mousejoint.setTarget(currentMousePosition);
 			System.out.println(Gdx.input.getX() + ", " + Gdx.input.getY());
 		}
 
-		
-		
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		debugRenderer.render(world, camera.combined);
 		world.step(BOX_STEP, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
