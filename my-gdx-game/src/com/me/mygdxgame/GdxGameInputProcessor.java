@@ -2,6 +2,7 @@ package com.me.mygdxgame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 public class GdxGameInputProcessor implements InputProcessor {
 
 	
+	private static final float FORCA_DE_IMPULSO = 1000f;
 	private Body circleBody;
 
 	public GdxGameInputProcessor(Body circleBody) {
@@ -44,8 +46,14 @@ public class GdxGameInputProcessor implements InputProcessor {
 		
 		Vector2 currentMousePosition = new Vector2(x, Math.abs(y - MyGdxGame.camera.viewportHeight));
 
-		
-		circleBody.applyLinearImpulse(currentMousePosition.add(circleBody.getPosition()).add(new Vector2(100f, 100f)), circleBody.getPosition());
+		System.out.println(currentMousePosition.x + ", " + currentMousePosition.y);
+
+		//Cálculo da Direção do Impulso contrario ao mousejoint.position
+		Vector2 direcao = currentMousePosition.sub(circleBody.getPosition());
+		direcao.nor();
+		Vector2 impulso = direcao.mul(FORCA_DE_IMPULSO * circleBody.getMass() * -1f);
+				
+		circleBody.applyLinearImpulse(impulso, currentMousePosition);
 		
 		System.out.println("touchUp");
 		return false;
@@ -58,7 +66,7 @@ public class GdxGameInputProcessor implements InputProcessor {
 		
 		Vector2 currentMousePosition = new Vector2(x, Math.abs(y - MyGdxGame.camera.viewportHeight));
 		MyGdxGame.mousejoint.setTarget(currentMousePosition);
-		System.out.println("touchDragged");
+//		System.out.println("touchDragged");
 		return false;
 	}
 

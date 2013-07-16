@@ -158,8 +158,9 @@ public class MyGdxGame implements ApplicationListener {
 	private void createCircle() {
 		BodyDef circleBodyDef = new BodyDef();
 		circleBodyDef.type = BodyType.DynamicBody;
-		circleBodyDef.position.set(100,120);
+		circleBodyDef.position.set(150,330);
 		circleBodyDef.angularDamping = 10f;
+		circleBodyDef.linearDamping = 0.6f;
 		circleBody = world.createBody(circleBodyDef);
 
 		CircleShape dynamicCircle = new CircleShape();
