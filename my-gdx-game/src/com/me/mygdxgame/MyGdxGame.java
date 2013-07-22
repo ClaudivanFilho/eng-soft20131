@@ -178,24 +178,7 @@ public class MyGdxGame implements ApplicationListener {
 	
 	private void setImage()
 	{
-		BodyEditorLoader loader = new BodyEditorLoader("/data/tampa-para-servir-refrigerante.png");
-
-	    // 1. Create a BodyDef, as usual.
-	    BodyDef bd = new BodyDef();
-	    bd.position.set(0, 0);
-	    bd.type = BodyType.DynamicBody;
-
-	    // 2. Create a FixtureDef, as usual.
-	    FixtureDef fd = new FixtureDef();
-	    fd.density = 1;
-	    fd.friction = 0.5f;
-	    fd.restitution = 0.3f;
-
-	    // 3. Create a Body, as usual.
-	    bottleModel = world.createBody(bd);
-
-	    // 4. Create the body fixture automatically by using the loader.
-	    loader.attachFixture(bottleModel, "test01", fd, BOTTLE_WIDTH);
+		
 	}
 
 	private void createCamera() {
