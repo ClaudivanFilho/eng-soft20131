@@ -10,6 +10,8 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -25,6 +27,7 @@ import com.badlogic.gdx.physics.box2d.joints.FrictionJointDef;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
@@ -171,6 +174,28 @@ public class MyGdxGame implements ApplicationListener {
 		fixtureDef.friction = 5.0f;
 		fixtureDef.restitution = 1;
 		circleBody.createFixture(fixtureDef);
+	}
+	
+	private void setImage()
+	{
+		BodyEditorLoader loader = new BodyEditorLoader("/data/tampa-para-servir-refrigerante.png");
+
+	    // 1. Create a BodyDef, as usual.
+	    BodyDef bd = new BodyDef();
+	    bd.position.set(0, 0);
+	    bd.type = BodyType.DynamicBody;
+
+	    // 2. Create a FixtureDef, as usual.
+	    FixtureDef fd = new FixtureDef();
+	    fd.density = 1;
+	    fd.friction = 0.5f;
+	    fd.restitution = 0.3f;
+
+	    // 3. Create a Body, as usual.
+	    bottleModel = world.createBody(bd);
+
+	    // 4. Create the body fixture automatically by using the loader.
+	    loader.attachFixture(bottleModel, "test01", fd, BOTTLE_WIDTH);
 	}
 
 	private void createCamera() {
