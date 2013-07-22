@@ -2,6 +2,7 @@ package com.me.mygdxgame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -12,9 +13,11 @@ public class GdxGameInputProcessor implements InputProcessor {
 	
 	private static final float FORCA_DE_IMPULSO = 1000f;
 	private Body circleBody;
+	private Sprite sprite;
 
-	public GdxGameInputProcessor(Body circleBody) {
+	public GdxGameInputProcessor(Body circleBody, Sprite sprite) {
 		this.circleBody = circleBody;
+		this.sprite = sprite;
 	}
 
 	@Override

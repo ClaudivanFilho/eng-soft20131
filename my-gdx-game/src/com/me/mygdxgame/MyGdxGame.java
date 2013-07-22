@@ -1,37 +1,28 @@
 package com.me.mygdxgame;
 
-import sun.management.Sensor;
-
 import aurelienribon.bodyeditor.BodyEditorLoader;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.JointDef.JointType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.FrictionJoint;
 import com.badlogic.gdx.physics.box2d.joints.FrictionJointDef;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
-import com.sun.org.apache.xpath.internal.operations.And;
 
 public class MyGdxGame implements ApplicationListener {
 	private Vector2 gravity;
@@ -53,6 +44,9 @@ public class MyGdxGame implements ApplicationListener {
 	private Body boxBody;
 	private FrictionJoint frictionJoint;
 	private BodyDef groundBodyDef;
+	private Texture texture;
+	private Sprite sprite;
+	private SpriteBatch spriteBatch;
 	
 	@Override
 	public void create() {
@@ -67,6 +61,8 @@ public class MyGdxGame implements ApplicationListener {
 		//Circle
 		createCircle();
 		
+		setImage();
+		
 		createBox();
 
 		createGroundBody();
@@ -78,7 +74,7 @@ public class MyGdxGame implements ApplicationListener {
 		createSpeedway();
 		
 		//Setting input processor
-		Gdx.input.setInputProcessor(new GdxGameInputProcessor(circleBody));
+		Gdx.input.setInputProcessor(new GdxGameInputProcessor(circleBody, sprite));
 		
 		//Setting Rederer
 		debugRenderer = new Box2DDebugRenderer();
@@ -167,7 +163,7 @@ public class MyGdxGame implements ApplicationListener {
 		circleBody = world.createBody(circleBodyDef);
 
 		CircleShape dynamicCircle = new CircleShape();
-		dynamicCircle.setRadius(10f);
+		dynamicCircle.setRadius(16f);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = dynamicCircle;
 		fixtureDef.density = 1.0f;
@@ -178,7 +174,21 @@ public class MyGdxGame implements ApplicationListener {
 	
 	private void setImage()
 	{
-		
+
+		 // loading a texture from image file
+		 texture = new Texture("data/tampa1.png");
+		 	
+		// setting a filter is optional, default = Nearest
+		 texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		 
+
+		// binding texture to sprite and setting some attributes
+		 sprite = new Sprite(texture);
+		 sprite.setSize(32f, 32f);
+		 sprite.setPosition(circleBody.getPosition().x - 16, circleBody.getPosition().y - 16);
+		 
+
+		 spriteBatch = new SpriteBatch();
 	}
 
 	private void createCamera() {
@@ -206,7 +216,29 @@ public class MyGdxGame implements ApplicationListener {
 		debugRenderer.render(world, camera.combined);
 		world.step(BOX_STEP, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
 		
-		
+		// cleaning up GL state... (if you enabled it before!)
+		 Gdx.gl.glDisable(GL10.GL_CULL_FACE);
+		 
+		spriteBatch.begin();
+		sprite.setPosition(circleBody.getPosition().x - 16, circleBody.getPosition().y - 16);
+
+		// this is only one possible drawing out of many
+		 sprite.draw(spriteBatch);
+		 
+
+		// this is another one
+		 spriteBatch.draw(texture, circleBody.getPosition().x, circleBody.getPosition().y, 32, 32, texture.getWidth(), texture.getHeight());
+		 
+
+		// and a third...
+		 sprite.draw(spriteBatch, 100);
+		 
+
+		spriteBatch.end();
+		 
+
+		// re-enable GL state... (if you need it)
+		 Gdx.gl.glEnable(GL10.GL_CULL_FACE);
 	}
 
 	@Override
