@@ -121,7 +121,7 @@ public class MyGdxGame implements ApplicationListener {
 	 
 	    // 1. Create a BodyDef, as usual.
 	    BodyDef bd = new BodyDef();
-	    bd.position.set(200, 300);
+	    bd.position.set(300, 250);
 	    bd.type = BodyType.StaticBody;
 	 
 	    // 2. Create a FixtureDef, as usual.
