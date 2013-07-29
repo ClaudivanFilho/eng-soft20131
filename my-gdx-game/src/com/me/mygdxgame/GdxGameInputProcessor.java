@@ -2,21 +2,23 @@ package com.me.mygdxgame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 
 public class GdxGameInputProcessor implements InputProcessor {
 
 	
 	private static final float FORCA_DE_IMPULSO = 1000f;
-	private Body circleBody;
+	private Tampa tampa;
 	private Sprite sprite;
+	private TampinhaWorld world;
+	private Camera camera;
 
-	public GdxGameInputProcessor(Body circleBody, Sprite sprite) {
-		this.circleBody = circleBody;
+	public GdxGameInputProcessor(Camera camera, TampinhaWorld world, Tampa circleBody, Sprite sprite) {
+		this.camera = camera;
+		this.world = world;
+		this.tampa = circleBody;
 		this.sprite = sprite;
 	}
 
@@ -47,16 +49,16 @@ public class GdxGameInputProcessor implements InputProcessor {
 		float x = Gdx.input.getX();
 		float y = Gdx.input.getY();
 		
-		Vector2 currentMousePosition = new Vector2(x, Math.abs(y - MyGdxGame.camera.viewportHeight));
+		Vector2 currentMousePosition = new Vector2(x, Math.abs(y - camera.viewportHeight));
 
 		System.out.println(currentMousePosition.x + ", " + currentMousePosition.y);
 
 		//Cálculo da Direção do Impulso contrario ao mousejoint.position
-		Vector2 direcao = currentMousePosition.sub(circleBody.getPosition());
+		Vector2 direcao = currentMousePosition.sub(tampa.getBody().getPosition());
 		direcao.nor();
-		Vector2 impulso = direcao.mul(FORCA_DE_IMPULSO * circleBody.getMass() * -1f);
+		Vector2 impulso = direcao.mul(FORCA_DE_IMPULSO * tampa.getBody().getMass() * -1f);
 				
-		circleBody.applyLinearImpulse(impulso, currentMousePosition);
+		tampa.getBody().applyLinearImpulse(impulso, currentMousePosition);
 		
 		System.out.println("touchUp");
 		return false;
@@ -67,8 +69,8 @@ public class GdxGameInputProcessor implements InputProcessor {
 		float x = Gdx.input.getX();
 		float y = Gdx.input.getY();
 		
-		Vector2 currentMousePosition = new Vector2(x, Math.abs(y - MyGdxGame.camera.viewportHeight));
-		MyGdxGame.mousejoint.setTarget(currentMousePosition);
+		Vector2 currentMousePosition = new Vector2(x, Math.abs(y - camera.viewportHeight));
+		world.getMouseJoint().setTarget(currentMousePosition);
 //		System.out.println("touchDragged");
 		return false;
 	}
