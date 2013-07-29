@@ -53,18 +53,9 @@ public class MyGdxGame implements ApplicationListener {
 		
 		//Camera settings
 		createCamera();
-
-		//Cria a tampa
-		tampa = new Tampa(tampinhaWorld);
-
-		//Cria MouseJoint
-		tampinhaWorld.createMouseJoint(tampa.getBody());
-		
-		//Cria Pista
-		pista = new Pista(tampinhaWorld);
 		
 		//Setting input processor
-		Gdx.input.setInputProcessor(new GdxGameInputProcessor(camera, tampinhaWorld, tampa, sprite));
+		Gdx.input.setInputProcessor(new GdxGameInputProcessor(camera, tampinhaWorld));
 		
 		//Setting Rederer
 		debugRenderer = new Box2DDebugRenderer();
@@ -91,8 +82,6 @@ public class MyGdxGame implements ApplicationListener {
 		
 		tampinhaWorld.render();
 		 
-		tampa.render();
-		
 	}
 
 	@Override

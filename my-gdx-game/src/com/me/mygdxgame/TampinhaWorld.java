@@ -14,6 +14,8 @@ public class TampinhaWorld {
 	private Vector2 gravity;
 	private Body currentBody;
 	private MouseJoint mouseJoint;
+	private Tampa tampa;
+	private Pista pista;
 	
 	static final float BOX_STEP = 1 / 60f;
 	static final int BOX_VELOCITY_ITERATIONS = 6;
@@ -22,8 +24,16 @@ public class TampinhaWorld {
 	static final float BOX_WORLD_TO = 100f;
 	
 	public TampinhaWorld() {
+		//Cria o Mundo
 		this.gravity = new Vector2();
 		this.world = new World(gravity, true);
+		//Cria a tampa
+		this.tampa = new Tampa(this);
+		//Cria o MouseJoint
+		createMouseJoint(tampa.getBody());
+		//Cria Pista
+		this.pista = new Pista(this);
+		
 	}
 	
 	public World getWorld() {
@@ -60,7 +70,12 @@ public class TampinhaWorld {
 	
 	public void render() {
 		world.step(BOX_STEP, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
+		tampa.render();
+	}
+
+	public Tampa getTampa() {
 		
+		return this.tampa;
 	}
 
 }

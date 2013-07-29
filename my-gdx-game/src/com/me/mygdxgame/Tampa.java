@@ -91,8 +91,10 @@ public class Tampa {
 
 		// re-enable GL state... (if you need it)
 //		Gdx.gl.glEnable(GL10.GL_CULL_FACE);
-		
+	}
 
+	public Sprite getSprite() {
+		return sprite;
 	}
 
 }

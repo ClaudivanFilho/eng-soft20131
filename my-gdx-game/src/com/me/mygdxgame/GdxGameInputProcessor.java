@@ -15,11 +15,11 @@ public class GdxGameInputProcessor implements InputProcessor {
 	private TampinhaWorld world;
 	private Camera camera;
 
-	public GdxGameInputProcessor(Camera camera, TampinhaWorld world, Tampa circleBody, Sprite sprite) {
+	public GdxGameInputProcessor(Camera camera, TampinhaWorld world) {
 		this.camera = camera;
 		this.world = world;
-		this.tampa = circleBody;
-		this.sprite = sprite;
+		this.tampa = world.getTampa();
+		this.sprite = tampa.getSprite();
 	}
 
 	@Override
