@@ -1,8 +1,13 @@
 package com.me.mygdxgame;
 
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
@@ -31,7 +36,8 @@ public class TampinhaWorld {
 		createMouseJoint(tampa.getBody());
 		//Cria Pista
 		this.pista = new Pista(this);
-		
+		ContactListener listener = new MyContactListener();
+		world.setContactListener(listener);
 	}
 	
 	public World getWorld() {
@@ -40,6 +46,7 @@ public class TampinhaWorld {
 
 	public Body createBody(BodyDef bodyDef) {
 		return world.createBody(bodyDef);
+		
 	}
 
 
@@ -70,6 +77,11 @@ public class TampinhaWorld {
 		world.step(BOX_STEP, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
 		pista.render();
 		tampa.render();
+		
+//		myB2World->SetContactListener(listener);
+//		if (Intersector.overlapConvexPolygons(tampa.getBody()., pista.getBody())) {
+//			
+//		}
 	}
 
 	public Tampa getTampa() {

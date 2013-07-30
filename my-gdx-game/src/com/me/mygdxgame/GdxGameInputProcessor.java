@@ -39,8 +39,6 @@ public class GdxGameInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		System.out.println("touch down!");
-		
 		return false;
 	}
 
@@ -60,7 +58,6 @@ public class GdxGameInputProcessor implements InputProcessor {
 				
 		tampa.getBody().applyLinearImpulse(impulso, currentMousePosition);
 		
-		System.out.println("touchUp");
 		return false;
 	}
 
@@ -71,7 +68,6 @@ public class GdxGameInputProcessor implements InputProcessor {
 		
 		Vector2 currentMousePosition = new Vector2(x, Math.abs(y - camera.viewportHeight));
 		world.getMouseJoint().setTarget(currentMousePosition);
-//		System.out.println("touchDragged");
 		return false;
 	}
 

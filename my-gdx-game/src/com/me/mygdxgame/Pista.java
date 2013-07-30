@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -41,13 +42,14 @@ public class Pista {
 	    speedWayPosition = new Vector2(200, 70);//TODO padronizar as posições
 	    bd.position.set(speedWayPosition);
 	    bd.type = BodyType.StaticBody;
-	 
+	    
 	    // 2. Create a FixtureDef, as usual.
 	    FixtureDef fd = new FixtureDef();
 	    fd.density = 1;
 	    fd.friction = 0.5f;
 	    fd.restitution = 0.3f;
-	 
+	    fd.isSensor = true;
+	    
 	    speedwayBody = world.createBody(bd);
 	 
 	    float SPEEDWAY_WIDTH = 512f;
@@ -102,5 +104,9 @@ public class Pista {
 		// re-enable GL state... (if you need it)
 //		Gdx.gl.glEnable(GL10.GL_CULL_FACE);
 
+	}
+
+	public Body getBody() {
+		return this.speedwayBody;
 	}
 }
