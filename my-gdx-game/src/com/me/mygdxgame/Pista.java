@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -21,11 +23,13 @@ public class Pista {
 	private Sprite sprite;
 	private Body speedwayBody;
 	private SpriteBatch spriteBatch;
+	private Vector2 speedWayBodyOrigin;
+	private Vector2 speedWayPosition;
 
 	public Pista(TampinhaWorld world) {
 		this.world = world;
-		criarPista();
 		criarImagemDaPista();
+		criarPista();
 	}
 
 	private void criarPista() {
@@ -34,7 +38,8 @@ public class Pista {
 	 
 	    // 1. Create a BodyDef, as usual.
 	    BodyDef bd = new BodyDef();
-	    bd.position.set(300, 250);
+	    speedWayPosition = new Vector2(200, 70);//TODO padronizar as posições
+	    bd.position.set(speedWayPosition);
 	    bd.type = BodyType.StaticBody;
 	 
 	    // 2. Create a FixtureDef, as usual.
@@ -45,9 +50,11 @@ public class Pista {
 	 
 	    speedwayBody = world.createBody(bd);
 	 
-	    float SPEEDWAY_WIDTH = 250f;
+	    float SPEEDWAY_WIDTH = 512f;
 		// 4. Create the body fixture automatically by using the loader.
-	    loader.attachFixture(speedwayBody, "Name", fd, SPEEDWAY_WIDTH );
+	    loader.attachFixture(speedwayBody, "pista1", fd, SPEEDWAY_WIDTH );
+	    
+	    speedWayBodyOrigin = loader.getOrigin("pista1", SPEEDWAY_WIDTH).cpy();
 		
 	}
 	
@@ -59,18 +66,25 @@ public class Pista {
 		
 		// binding texture to sprite and setting some attributes
 		sprite = new Sprite(texture);
-		sprite.setSize(512f, 512f);
-		sprite.setPosition(speedwayBody.getPosition().x,
-				speedwayBody.getPosition().y);
+//		sprite.setSize(512f, 512f);
+//		sprite.setScale(60f);
+		sprite.setPosition(200,70);//TODO padronizar as posições
 
 		spriteBatch = new SpriteBatch();
 
 	}
 	
 	public void render() {
+		
+		
+	    
 		spriteBatch.begin();
-		sprite.setPosition(speedwayBody.getPosition().x,
-				speedwayBody.getPosition().y);
+		//Setting the position
+		Vector2 pistaPos = speedwayBody.getPosition().sub(speedWayBodyOrigin);
+		
+	    sprite.setPosition(pistaPos.x, pistaPos.y);
+	    sprite.setOrigin(speedWayBodyOrigin.x, speedWayBodyOrigin.y);
+	    sprite.setRotation(speedwayBody.getAngle() * MathUtils.radiansToDegrees);
 
 		// this is only one possible drawing out of many
 		sprite.draw(spriteBatch);

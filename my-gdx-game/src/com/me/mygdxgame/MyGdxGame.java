@@ -13,11 +13,11 @@ public class MyGdxGame implements ApplicationListener {
 	
 	@Override
 	public void create() {
-		//Create World
-		tampinhaWorld = new TampinhaWorld();
-		
 		//Camera settings
 		createCamera();
+		
+		//Create World
+		tampinhaWorld = new TampinhaWorld();
 		
 		//Setting input processor
 		Gdx.input.setInputProcessor(new GdxGameInputProcessor(camera, tampinhaWorld));
