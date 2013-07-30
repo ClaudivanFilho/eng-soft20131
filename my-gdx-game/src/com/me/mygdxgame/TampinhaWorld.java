@@ -36,6 +36,7 @@ public class TampinhaWorld {
 		createMouseJoint(tampa.getBody());
 		//Cria Pista
 		this.pista = new Pista(this);
+		//Addind the contact listener
 		ContactListener listener = new MyContactListener();
 		world.setContactListener(listener);
 	}
