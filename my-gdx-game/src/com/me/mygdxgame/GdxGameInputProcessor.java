@@ -10,16 +10,20 @@ public class GdxGameInputProcessor implements InputProcessor {
 
 	
 	private static final float FORCA_DE_IMPULSO = 1000f;
-	private Tampa tampa;
-	private Sprite sprite;
 	private TampinhaWorld world;
 	private Camera camera;
+	private Tampa tampa1;
+	private Tampa tampa2;
+	private Tampa tampaDaVez;
+	private boolean vezDoJogador;
 
 	public GdxGameInputProcessor(Camera camera, TampinhaWorld world) {
 		this.camera = camera;
 		this.world = world;
-		this.tampa = world.getTampa();
-		this.sprite = tampa.getSprite();
+		this.tampa1 = world.getTampa1();
+		this.tampa2 = world.getTampa2();
+		this.tampaDaVez = tampa1; 
+		this.vezDoJogador= true;
 	}
 
 	@Override
@@ -39,25 +43,21 @@ public class GdxGameInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		world.createMouseJoint(tampaDaVez.getBody());
+		System.out.println("-- TouchDown --");
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		float x = Gdx.input.getX();
-		float y = Gdx.input.getY();
-		
-		Vector2 currentMousePosition = new Vector2(x, Math.abs(y - camera.viewportHeight));
-
-		System.out.println(currentMousePosition.x + ", " + currentMousePosition.y);
-
-		//Cálculo da Direção do Impulso contrario ao mousejoint.position
-		Vector2 direcao = currentMousePosition.sub(tampa.getBody().getPosition());
-		direcao.nor();
-		Vector2 impulso = direcao.mul(FORCA_DE_IMPULSO * tampa.getBody().getMass() * -1f);
-				
-		tampa.getBody().applyLinearImpulse(impulso, currentMousePosition);
-		
+		jogarTampa();
+		if (vezDoJogador) {
+			tampaDaVez = tampa1;
+			vezDoJogador = false;
+		} else {
+			tampaDaVez = tampa2;
+			vezDoJogador = true;
+		}
 		return false;
 	}
 
@@ -65,9 +65,9 @@ public class GdxGameInputProcessor implements InputProcessor {
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		float x = Gdx.input.getX();
 		float y = Gdx.input.getY();
-		
 		Vector2 currentMousePosition = new Vector2(x, Math.abs(y - camera.viewportHeight));
 		world.getMouseJoint().setTarget(currentMousePosition);
+		System.out.println("-- TouchDragged --");
 		return false;
 	}
 
@@ -81,4 +81,19 @@ public class GdxGameInputProcessor implements InputProcessor {
 		return false;
 	}
 
+	private void jogarTampa() {
+		float x = Gdx.input.getX();
+		float y = Gdx.input.getY();
+		
+		Vector2 currentMousePosition = new Vector2(x, Math.abs(y - camera.viewportHeight));
+
+//		System.out.println(currentMousePosition.x + ", " + currentMousePosition.y);
+
+		//Cálculo da Direção do Impulso contrario ao mousejoint.position
+		Vector2 direcao = currentMousePosition.sub(tampaDaVez.getBody().getPosition());
+		direcao.nor();
+		Vector2 impulso = direcao.mul(FORCA_DE_IMPULSO * tampaDaVez.getBody().getMass() * -1f);
+				
+		tampaDaVez.getBody().applyLinearImpulse(impulso, currentMousePosition);
+	}
 }

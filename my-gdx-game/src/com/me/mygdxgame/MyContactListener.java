@@ -11,7 +11,6 @@ public class MyContactListener implements ContactListener {
 
 	@Override
 	public void beginContact(Contact contact) {		
-		
 		//Sound Effect
 		Sound sound = Gdx.audio.newSound(Gdx.files.internal("data/glass-ding.mp3"));
 		sound.play();

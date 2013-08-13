@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -18,16 +19,18 @@ public class Tampa {
 	private SpriteBatch spriteBatch;
 	private Sprite sprite;
 	private Texture texture;
+	private Vector2 position;
 
-	public Tampa(TampinhaWorld world) {
-		createCircleBody(world);
+	public Tampa(TampinhaWorld world, Vector2 tampa1Position) {
+		this.position = tampa1Position;
+		createCircleBody(world, this.position);
 		createImage();
 	}
 
-	private void createCircleBody(TampinhaWorld world) {
+	private void createCircleBody(TampinhaWorld world, Vector2 position) {
 		BodyDef circleBodyDef = new BodyDef();
 		circleBodyDef.type = BodyType.DynamicBody;
-		circleBodyDef.position.set(300, 330);
+		circleBodyDef.position.set(position);
 		circleBodyDef.angularDamping = 10f;
 		circleBodyDef.linearDamping = 0.6f;
 		circleBody = world.createBody(circleBodyDef);

@@ -17,7 +17,9 @@ public class TampinhaWorld {
 	private Vector2 gravity;
 	private Body currentBody;
 	private MouseJoint mouseJoint;
-	private Tampa tampa;
+	
+	private Tampa tampa1;
+	private Tampa tampa2;
 	private Pista pista;
 	
 	static final float BOX_STEP = 1 / 60f;
@@ -30,13 +32,14 @@ public class TampinhaWorld {
 		//Cria o Mundo
 		this.gravity = new Vector2();
 		this.world = new World(gravity, true);
-		//Cria a tampa
-		this.tampa = new Tampa(this);
-		//Cria o MouseJoint
-		createMouseJoint(tampa.getBody());
-		//Cria Pista
+		//Cria as duas tampas
+		Vector2 tampa1Position = new Vector2(300, 330);
+		this.tampa1 = new Tampa(this, tampa1Position);
+		Vector2 tampa2Position = new Vector2(340, 330);
+		this.tampa2 = new Tampa(this, tampa2Position);
+		//Cria a Pista
 		this.pista = new Pista(this);
-		//Addind the contact listener
+		//Adding the contact listener
 		ContactListener listener = new MyContactListener();
 		world.setContactListener(listener);
 	}
@@ -50,8 +53,10 @@ public class TampinhaWorld {
 		
 	}
 
-
 	public void createMouseJoint(Body tampaBody) {
+		if (mouseJoint != null) {
+			world.destroyJoint(mouseJoint);
+		}
 		MouseJointDef mouseJointDef = new MouseJointDef();
 		currentBody = tampaBody;
 		
@@ -77,17 +82,17 @@ public class TampinhaWorld {
 	public void render() {
 		world.step(BOX_STEP, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
 		pista.render();
-		tampa.render();
-		
-//		myB2World->SetContactListener(listener);
-//		if (Intersector.overlapConvexPolygons(tampa.getBody()., pista.getBody())) {
-//			
-//		}
+		tampa1.render();
+		tampa2.render();
 	}
 
-	public Tampa getTampa() {
+	public Tampa getTampa1() {
 		
-		return this.tampa;
+		return this.tampa1;
+	}
+
+	public Tampa getTampa2() {
+		return this.tampa2;
 	}
 
 }
