@@ -40,7 +40,7 @@ public class Pista {
 	 
 	    // 1. Create a BodyDef, as usual.
 	    BodyDef bd = new BodyDef();
-	    speedWayPosition = new Vector2(200*Util.changeX() , 70*Util.changeX());//TODO padronizar as posições
+	    speedWayPosition = new Vector2(0*Util.changeX() , 0*Util.changeX());//TODO padronizar as posições
 	    bd.position.set(speedWayPosition);
 	    bd.type = BodyType.StaticBody;
 	    

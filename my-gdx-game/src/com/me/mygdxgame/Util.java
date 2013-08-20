@@ -5,8 +5,8 @@ import com.badlogic.gdx.Gdx;
 public class Util {
 	private static float w = Gdx.graphics.getWidth();
 	private static float h = Gdx.graphics.getHeight();
-	private final static float wDefault = 1024f;
-	private final static float hDefault = 720f;
+	private final static float wDefault = 512f;
+	private final static float hDefault = 512f;
 	private static float p = hDefault / wDefault;
 	private static float p2 = wDefault / hDefault;
 
@@ -14,11 +14,9 @@ public class Util {
 
 	public static float changeX() {
 		if(p < h/w){
-			System.out.println("entrou2");
-
 			return  (w / wDefault)* p2;
 		}
-		return  (w / wDefault)*p;
+		return  (w / wDefault)*h/w;
 	}
 
 	public static float changeY() {
@@ -26,7 +24,7 @@ public class Util {
 		if(p > h/w){
 			return  (h / hDefault)*p2;
 		}
-		return (h / hDefault)*p;
+		return (h / hDefault)*w/h;
 	}
 
 	/*
