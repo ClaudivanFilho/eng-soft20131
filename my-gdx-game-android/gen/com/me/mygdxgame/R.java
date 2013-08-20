@@ -13,10 +13,54 @@ public final class R {
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
+    public static final class id {
+        public static final int butao_arcade=0x7f050009;
+        public static final int butao_campeonato=0x7f050008;
+        public static final int butao_jogar=0x7f05000b;
+        public static final int butao_menu=0x7f050012;
+        public static final int butao_menu2=0x7f05000a;
+        public static final int butao_opcoes=0x7f05000c;
+        public static final int butao_sair=0x7f05000d;
+        public static final int butao_tampa1=0x7f050005;
+        public static final int butao_tampa2=0x7f050006;
+        public static final int butao_voltar=0x7f050001;
+        public static final int butao_voltarTampa=0x7f050007;
+        public static final int butaopista1=0x7f050002;
+        public static final int butaopista2=0x7f050003;
+        public static final int butaopista3=0x7f050004;
+        public static final int horizontalScrollView1=0x7f050000;
+        public static final int seekBarMusica=0x7f05000e;
+        public static final int seekBarSom=0x7f05000f;
+        public static final int textView1=0x7f050010;
+        public static final int textView2=0x7f050011;
+    }
     public static final class layout {
-        public static final int main=0x7f030000;
+        public static final int activity_escolherpista=0x7f030000;
+        public static final int activity_escolhertampa=0x7f030001;
+        public static final int activity_jogar=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_opcoes=0x7f030004;
+        public static final int main=0x7f030005;
     }
     public static final class string {
+        public static final int action_settings=0x7f040001;
         public static final int app_name=0x7f040000;
+        public static final int name_arcade=0x7f04000b;
+        public static final int name_audio=0x7f040008;
+        public static final int name_campeonato=0x7f04000a;
+        public static final int name_escolher=0x7f04000e;
+        public static final int name_escolhertampa=0x7f040012;
+        public static final int name_jogar=0x7f040003;
+        public static final int name_label=0x7f040002;
+        public static final int name_menu=0x7f040009;
+        public static final int name_musica=0x7f040007;
+        public static final int name_opcoes=0x7f040004;
+        public static final int name_pista1=0x7f04000f;
+        public static final int name_pista2=0x7f040010;
+        public static final int name_pista3=0x7f040011;
+        public static final int name_sair=0x7f040005;
+        public static final int name_selecionar=0x7f04000d;
+        public static final int name_som=0x7f040006;
+        public static final int name_voltar=0x7f04000c;
     }
 }

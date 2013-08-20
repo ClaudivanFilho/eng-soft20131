@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".NovoActivity" >
+
+    <Button
+        android:id="@+id/butao_jogar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/butao_opcoes"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/butao_opcoes"
+        android:layout_marginTop="18dp"
+        android:text="@string/name_jogar" />
+
+     <Button
+         android:id="@+id/butao_opcoes"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/butao_jogar"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="38dp"
+         android:text="@string/name_opcoes" />
+
+     <Button
+         android:id="@+id/butao_sair"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/butao_opcoes"
+         android:layout_alignRight="@+id/butao_opcoes"
+         android:layout_below="@+id/butao_opcoes"
+         android:layout_marginTop="38dp"
+         android:text="@string/name_sair" />
+
+</RelativeLayout>

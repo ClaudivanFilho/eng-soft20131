@@ -29,8 +29,9 @@ public class Pista {
 
 	public Pista(TampinhaWorld world) {
 		this.world = world;
-		criarImagemDaPista();
 		criarPista();
+		criarImagemDaPista();
+
 	}
 
 	private void criarPista() {
@@ -39,7 +40,7 @@ public class Pista {
 	 
 	    // 1. Create a BodyDef, as usual.
 	    BodyDef bd = new BodyDef();
-	    speedWayPosition = new Vector2(200, 70);//TODO padronizar as posições
+	    speedWayPosition = new Vector2(200*Util.changeX() , 70*Util.changeX());//TODO padronizar as posições
 	    bd.position.set(speedWayPosition);
 	    bd.type = BodyType.StaticBody;
 	    
@@ -52,7 +53,7 @@ public class Pista {
 	    
 	    speedwayBody = world.createBody(bd);
 	 
-	    float SPEEDWAY_WIDTH = 512f;
+	    float SPEEDWAY_WIDTH = 512*Util.changeX();
 		// 4. Create the body fixture automatically by using the loader.
 	    loader.attachFixture(speedwayBody, "pista1", fd, SPEEDWAY_WIDTH );
 	    
@@ -68,8 +69,8 @@ public class Pista {
 		
 		// binding texture to sprite and setting some attributes
 		sprite = new Sprite(texture);
-//		sprite.setSize(512f, 512f);
-//		sprite.setScale(60f);
+		sprite.setSize(512*Util.changeX(), 512*Util.changeY());
+		//sprite.setScale(60f);
 		sprite.setPosition(200,70);//TODO padronizar as posições
 
 		spriteBatch = new SpriteBatch();
@@ -89,7 +90,6 @@ public class Pista {
 	    sprite.setRotation(speedwayBody.getAngle() * MathUtils.radiansToDegrees);
 
 		// this is only one possible drawing out of many
-		sprite.draw(spriteBatch);
 
 		// this is another one
 		spriteBatch.draw(texture, speedwayBody.getPosition().x,
@@ -98,6 +98,7 @@ public class Pista {
 
 		// and a third...
 		sprite.draw(spriteBatch, 100);
+		sprite.draw(spriteBatch);
 
 		spriteBatch.end();
 

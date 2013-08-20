@@ -5,11 +5,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 
 public class MyGdxGame implements ApplicationListener {
 	private TampinhaWorld tampinhaWorld;
 	private Box2DDebugRenderer debugRenderer;
+
 	public static OrthographicCamera camera;
 	
 	@Override
@@ -28,9 +30,11 @@ public class MyGdxGame implements ApplicationListener {
 	}
 
 	private void createCamera() {
+		
+		
 		camera = new OrthographicCamera();
-		camera.viewportHeight = 720;
-		camera.viewportWidth = 1024;
+		camera.viewportHeight =  Gdx.graphics.getHeight();
+		camera.viewportWidth = Gdx.graphics.getWidth();;
 		camera.position.set(camera.viewportWidth * .5f,
 				camera.viewportHeight * .5f, 0f);
 		camera.update();
@@ -51,6 +55,8 @@ public class MyGdxGame implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
+		
+		
 	}
 
 	@Override

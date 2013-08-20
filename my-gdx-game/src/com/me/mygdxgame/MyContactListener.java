@@ -24,7 +24,6 @@ public class MyContactListener implements ContactListener {
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		System.out.println("preSolve");
 
 	}
 

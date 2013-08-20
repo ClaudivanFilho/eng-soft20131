@@ -36,7 +36,7 @@ public class Tampa {
 		circleBody = world.createBody(circleBodyDef);
 
 		CircleShape dynamicCircle = new CircleShape();
-		dynamicCircle.setRadius(16f);
+		dynamicCircle.setRadius(16*Util.changeX());
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = dynamicCircle;
 		fixtureDef.density = 1.0f;
@@ -46,6 +46,8 @@ public class Tampa {
 	}
 
 	private void createImage() {
+	
+
 		// loading a texture from image file
 		texture = new Texture(imageURL);
 
@@ -54,7 +56,7 @@ public class Tampa {
 
 		// binding texture to sprite and setting some attributes
 		sprite = new Sprite(texture);
-		sprite.setSize(32f, 32f);
+		sprite.setSize(32*Util.changeX(), 32*Util.changeY());
 		sprite.setPosition(circleBody.getPosition().x - 16,
 				circleBody.getPosition().y - 16);
 
@@ -76,8 +78,8 @@ public class Tampa {
 
 	public void render() {
 		spriteBatch.begin();
-		sprite.setPosition(circleBody.getPosition().x - 16,
-				circleBody.getPosition().y - 16);
+		sprite.setPosition(circleBody.getPosition().x - 16*Util.changeX(),
+				circleBody.getPosition().y - 16*Util.changeY());
 
 		// this is only one possible drawing out of many
 		sprite.draw(spriteBatch);

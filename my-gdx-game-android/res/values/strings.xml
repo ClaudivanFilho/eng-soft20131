@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My LibGDX Game</string>
+     <string name="app_name">CapRacing</string>
+    <string name="action_settings">settings</string>
+    <string name="name_label">Nome:</string>
+    <string name="name_jogar">Jogar</string>
+    <string name="name_opcoes">Opções</string>
+    <string name="name_sair">Sair</string>
+    <string name="name_som">Som:</string>
+    <string name="name_musica">Música:</string>
+    <string name="name_audio">Áudio:</string>
+    <string name="name_menu">Menu</string>
+    <string name="name_campeonato">Campeonato</string>
+    <string name="name_arcade">Arcade</string>
+    <string name="name_voltar">Voltar</string>
+    <string name="name_selecionar">Selecionar</string>
+    <string name="name_escolher">Escolha a Pista</string>
+    <string name="name_pista1">Pista 1</string>
+    <string name="name_pista2">Pista 2</string>
+    <string name="name_pista3">Pista 3</string>
+    <string name="name_escolhertampa">Escolha sua Tampa</string>
 </resources>
