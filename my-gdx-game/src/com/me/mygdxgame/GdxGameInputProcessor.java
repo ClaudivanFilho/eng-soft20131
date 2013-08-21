@@ -55,9 +55,7 @@ public class GdxGameInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		System.out.println("FLAG STOP: " + world.flagStopTampa1);
 		if (!world.flagStopTampa1 && !world.flagStopTampa2) {
-			
 			joint = world.createMouseJoint(tampaDaVez.getBody());
 			return true;
 		}

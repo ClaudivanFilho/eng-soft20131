@@ -1,5 +1,11 @@
 package com.me.mygdxgame;
 
+import java.sql.Time;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -28,6 +34,8 @@ public class TampinhaWorld {
 	public boolean flagStopTampa1 = false;
 	public boolean flagStopTampa2 = false;
 	
+	TurnAnimation turnAnimation;
+	
 	public TampinhaWorld() {
 
 		// Cria o Mundo
@@ -40,6 +48,7 @@ public class TampinhaWorld {
 		this.tampa2 = new Tampa(this, tampa2Position);
 		// Cria a Pista
 		this.pista = new Pista(this);
+		turnAnimation = new TurnAnimation(1);  // começa com o jogador 1
 		// Adding the contact listener
 		ContactListener listener = new MyContactListener();
 		world.setContactListener(listener);
@@ -93,9 +102,11 @@ public class TampinhaWorld {
 		
 		paraTampa1((float) 2.5);
 		paraTampa2((float) 2.5);
+
 		pista.render();
 		tampa1.render();
 		tampa2.render();
+		turnAnimation.render();
 	}
 	
 	/**
@@ -112,6 +123,7 @@ public class TampinhaWorld {
 		if (velocidadeLinear < velocidade && flagStopTampa1) {
 			tampa1.getBody().setAwake(false);
 			flagStopTampa1 = false;
+			turnAnimation = new TurnAnimation(2);
 		}
 	}
 	
@@ -129,6 +141,7 @@ public class TampinhaWorld {
 		if (velocidadeLinear < velocidade && flagStopTampa2) {
 			tampa2.getBody().setAwake(false);
 			flagStopTampa2 = false;
+			turnAnimation = new TurnAnimation(1);
 		}
 	}
 
