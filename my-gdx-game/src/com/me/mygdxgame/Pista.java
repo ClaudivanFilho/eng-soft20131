@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -53,10 +54,9 @@ public class Pista {
 	    
 	    speedwayBody = world.createBody(bd);
 	 
-	    float SPEEDWAY_WIDTH = 512*Util.changeX();
+	    float SPEEDWAY_WIDTH = 1024*Util.changeX();
 		// 4. Create the body fixture automatically by using the loader.
 	    loader.attachFixture(speedwayBody, "pista1", fd, SPEEDWAY_WIDTH );
-	    
 	    speedWayBodyOrigin = loader.getOrigin("pista1", SPEEDWAY_WIDTH).cpy();
 		
 	}
@@ -69,9 +69,9 @@ public class Pista {
 		
 		// binding texture to sprite and setting some attributes
 		sprite = new Sprite(texture);
-		sprite.setSize(512*Util.changeX(), 512*Util.changeY());
+		sprite.setSize(1024*Util.changeX(),1024*Util.changeY());
 		//sprite.setScale(60f);
-		sprite.setPosition(200,70);//TODO padronizar as posições
+		//sprite.setPosition(500,500);//TODO padronizar as posições
 
 		spriteBatch = new SpriteBatch();
 
@@ -88,17 +88,15 @@ public class Pista {
 	    sprite.setPosition(pistaPos.x, pistaPos.y);
 	    sprite.setOrigin(speedWayBodyOrigin.x, speedWayBodyOrigin.y);
 	    sprite.setRotation(speedwayBody.getAngle() * MathUtils.radiansToDegrees);
-
+	    
 		// this is only one possible drawing out of many
-
+	    TextureRegion region = new TextureRegion(texture, 0, 0, 720,960);
+	    spriteBatch.draw(region, 0,0,1024*Util.changeX(),1024*Util.changeY());
 		// this is another one
-		spriteBatch.draw(texture, speedwayBody.getPosition().x,
-				speedwayBody.getPosition().y, 512, 512, texture.getWidth(),
-				texture.getHeight());
-
+	    
 		// and a third...
-		sprite.draw(spriteBatch, 100);
-		sprite.draw(spriteBatch);
+		//sprite.draw(spriteBatch, 100);
+		//sprite.draw(spriteBatch);
 
 		spriteBatch.end();
 
