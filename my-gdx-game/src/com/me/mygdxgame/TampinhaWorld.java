@@ -34,11 +34,9 @@ public class TampinhaWorld {
 		this.gravity = new Vector2();
 		this.world = new World(gravity, true);
 		// Cria as duas tampas
-		Vector2 tampa1Position = new Vector2(50 * Util.changeX(),
-				330 * Util.changeY());
+		Vector2 tampa1Position = new Vector2(100*Util.changeX(), 564*Util.changeY());
 		this.tampa1 = new Tampa(this, tampa1Position);
-		Vector2 tampa2Position = new Vector2(90 * Util.changeX(),
-				330 * Util.changeY());
+		Vector2 tampa2Position = new Vector2(150*Util.changeX(), 570*Util.changeY());
 		this.tampa2 = new Tampa(this, tampa2Position);
 		// Cria a Pista
 		this.pista = new Pista(this);
