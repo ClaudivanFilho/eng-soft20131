@@ -1,11 +1,19 @@
-
 package com.me.mygdxgame;
+
+import java.util.Vector;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Joint;
+import com.badlogic.gdx.physics.box2d.JointDef;
+import com.badlogic.gdx.physics.box2d.JointDef.JointType;
+import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
+import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 
 public class GdxGameInputProcessor implements InputProcessor {
 
@@ -17,6 +25,7 @@ public class GdxGameInputProcessor implements InputProcessor {
 	private Tampa tampa2;
 	private Tampa tampaDaVez;
 	private boolean vezDoJogador;
+	private MouseJoint joint;
 
 	public GdxGameInputProcessor(Camera camera, TampinhaWorld world) {
 		this.camera = camera;
@@ -44,7 +53,7 @@ public class GdxGameInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		world.createMouseJoint(tampaDaVez.getBody());
+		joint = world.createMouseJoint(tampaDaVez.getBody());
 		System.out.println("-- TouchDown --");
 		return false;
 	}
@@ -52,6 +61,7 @@ public class GdxGameInputProcessor implements InputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		jogarTampa();
+		world.getWorld().destroyJoint(joint);
 		if (vezDoJogador) {
 			tampaDaVez = tampa1;
 			vezDoJogador = false;
@@ -59,7 +69,26 @@ public class GdxGameInputProcessor implements InputProcessor {
 			tampaDaVez = tampa2;
 			vezDoJogador = true;
 		}
+		createJoint();
 		return false;
+	}
+	
+	private void createJoint() {
+		MouseJointDef mouseJointDef = new MouseJointDef();
+		Body currentBody = tampaDaVez.getBody();
+		
+		BodyDef mousePointBodyDef = new BodyDef();  
+        mousePointBodyDef.position.set(new Vector2(100, 100));
+        Body mousePointBody = world.createBody(mousePointBodyDef);
+		
+		mouseJointDef.target.set(tampaDaVez.getBody().getPosition());
+		mouseJointDef.bodyA = mousePointBody;
+		mouseJointDef.bodyB = currentBody;
+		mouseJointDef.collideConnected = false;
+		mouseJointDef.maxForce = 0;
+		mouseJointDef.frequencyHz = 20f;
+		
+		world.getWorld().createJoint(mouseJointDef);
 	}
 
 	@Override
