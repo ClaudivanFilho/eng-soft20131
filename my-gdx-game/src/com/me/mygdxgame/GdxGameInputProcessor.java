@@ -65,10 +65,10 @@ public class GdxGameInputProcessor implements InputProcessor {
 		jogarTampa();
 		world.getWorld().destroyJoint(joint);
 		if (vezDoJogador) {
-			tampaDaVez = tampa1;
+			tampaDaVez = tampa2;
 			vezDoJogador = false;
 		} else {
-			tampaDaVez = tampa2;
+			tampaDaVez = tampa1;
 			vezDoJogador = true;
 		}
 		createJoint();
