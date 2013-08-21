@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Joint;
 import com.badlogic.gdx.physics.box2d.JointDef;
 import com.badlogic.gdx.physics.box2d.JointDef.JointType;
@@ -18,7 +19,7 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 public class GdxGameInputProcessor implements InputProcessor {
 
 	
-	private static final float FORCA_DE_IMPULSO = 1000f;
+	private static final float FORCA_DE_IMPULSO = 1f;
 	private TampinhaWorld world;
 	private Camera camera;
 	private Tampa tampa1;
@@ -34,6 +35,7 @@ public class GdxGameInputProcessor implements InputProcessor {
 		this.tampa2 = world.getTampa2();
 		this.tampaDaVez = tampa1; 
 		this.vezDoJogador= true;
+		
 	}
 
 	@Override
@@ -119,10 +121,15 @@ public class GdxGameInputProcessor implements InputProcessor {
 
 //		System.out.println(currentMousePosition.x + ", " + currentMousePosition.y);
 
+		float x1 = currentMousePosition.x;
+		float x2 = tampaDaVez.getBody().getPosition().x;
+		float y1 = currentMousePosition.y;
+		float y2 =  tampaDaVez.getBody().getPosition().y;
+		double distancia = Math.sqrt( Math.pow( (x1 - x2),2 ) +  Math.pow( (y1 - y2),2 ) );
 		//Cálculo da Direção do Impulso contrario ao mousejoint.position
 		Vector2 direcao = currentMousePosition.sub(tampaDaVez.getBody().getPosition());
 		direcao.nor();
-		Vector2 impulso = direcao.mul(FORCA_DE_IMPULSO * tampaDaVez.getBody().getMass() * -1f);
+		Vector2 impulso = direcao.mul((int)distancia * FORCA_DE_IMPULSO * tampaDaVez.getBody().getMass() * -1f);
 				
 		tampaDaVez.getBody().applyLinearImpulse(impulso, currentMousePosition);
 	}
