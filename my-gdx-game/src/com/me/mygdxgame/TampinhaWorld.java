@@ -1,13 +1,9 @@
 package com.me.mygdxgame;
 
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
@@ -27,7 +23,11 @@ public class TampinhaWorld {
 	static final int BOX_POSITION_ITERATIONS = 2;
 	static final float WORLD_TO_BOX = 0.01f;
 	static final float BOX_WORLD_TO = 100f;
-
+	
+	// se a flagStop estiver true indica que tem alguma tampa em movimento.
+	public boolean flagStopTampa1 = false;
+	public boolean flagStopTampa2 = false;
+	
 	public TampinhaWorld() {
 
 		// Cria o Mundo
@@ -79,9 +79,57 @@ public class TampinhaWorld {
 
 	public void render() {
 		world.step(BOX_STEP, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
+		/*
+		System.out.println("ATIVO: " + tampa1.getBody().isActive());
+		System.out.println("AWAKE: " + tampa1.getBody().isAwake());
+		System.out.println("BULLET: " + tampa1.getBody().isBullet());
+		System.out.println("SLEPING: " + tampa1.getBody().isSleepingAllowed());
+		System.out.println("ANGULAR VELOCITY: " + tampa1.getBody().getAngularVelocity());
+		System.out.println("DAMPINF VELOCITY: " + tampa1.getBody().getAngularDamping());
+		System.out.println("LINEAR DAMPING: " + tampa1.getBody().getLinearDamping());
+		System.out.println("X: " + tampa1.getBody().getLinearVelocity().x 
+				+ " Y: " + tampa1.getBody().getLinearVelocity().x);
+		*/
+		
+		paraTampa1((float) 2.5);
+		paraTampa2((float) 2.5);
 		pista.render();
 		tampa1.render();
 		tampa2.render();
+	}
+	
+	/**
+	 * Para a tampa1 ao chegar em uma determinada velocidade
+	 * 
+	 * @param tampa
+	 */
+	private void paraTampa1(float velocidade) {
+		float velocidadeLinear = Math.abs(tampa1.getBody().getLinearVelocity().x);
+		if (velocidadeLinear > velocidade ) {
+			flagStopTampa1 = true;
+			//tampa1.getBody().setAwake(false);
+		}
+		if (velocidadeLinear < velocidade && flagStopTampa1) {
+			tampa1.getBody().setAwake(false);
+			flagStopTampa1 = false;
+		}
+	}
+	
+	/**
+	 * Para a tampa2 ao chegar em uma determinada velocidade
+	 * 
+	 * @param tampa
+	 */
+	private void paraTampa2(float velocidade) {
+		float velocidadeLinear = Math.abs(tampa2.getBody().getLinearVelocity().x);
+		if (velocidadeLinear > velocidade ) {
+			flagStopTampa2 = true;
+			//tampa1.getBody().setAwake(false);
+		}
+		if (velocidadeLinear < velocidade && flagStopTampa2) {
+			tampa2.getBody().setAwake(false);
+			flagStopTampa2 = false;
+		}
 	}
 
 	public Tampa getTampa1() {

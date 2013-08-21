@@ -55,27 +55,33 @@ public class GdxGameInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		joint = world.createMouseJoint(tampaDaVez.getBody());
-		System.out.println("-- TouchDown --");
+		System.out.println("FLAG STOP: " + world.flagStopTampa1);
+		if (!world.flagStopTampa1 && !world.flagStopTampa2) {
+			
+			joint = world.createMouseJoint(tampaDaVez.getBody());
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		jogarTampa();
-		world.getWorld().destroyJoint(joint);
-		if (vezDoJogador) {
-			tampaDaVez = tampa2;
-			vezDoJogador = false;
-		} else {
-			tampaDaVez = tampa1;
-			vezDoJogador = true;
+		if (!world.flagStopTampa1 && !world.flagStopTampa2) {
+			jogarTampa();
+			world.getWorld().destroyJoint(joint);
+			if (vezDoJogador) {
+				tampaDaVez = tampa2;
+				vezDoJogador = false;
+			} else {
+				tampaDaVez = tampa1;
+				vezDoJogador = true;
+			}
+			createJointVazio();
 		}
-		createJoint();
 		return false;
 	}
 	
-	private void createJoint() {
+	private void createJointVazio() {
 		MouseJointDef mouseJointDef = new MouseJointDef();
 		Body currentBody = tampaDaVez.getBody();
 		
