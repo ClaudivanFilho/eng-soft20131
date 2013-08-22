@@ -100,6 +100,8 @@ public class TampinhaWorld {
 				+ " Y: " + tampa1.getBody().getLinearVelocity().x);
 		*/
 		
+		System.out.println("TAMPA 1: " + tampa1.getBody().getLinearVelocity().x );
+		System.out.println("TAMPA 2: " + tampa2.getBody().getLinearVelocity().x );
 		paraTampa1((float) 2.5);
 		paraTampa2((float) 2.5);
 
@@ -116,11 +118,14 @@ public class TampinhaWorld {
 	 */
 	private void paraTampa1(float velocidade) {
 		float velocidadeLinear = Math.abs(tampa1.getBody().getLinearVelocity().x);
-		if (velocidadeLinear > velocidade ) {
+		if (velocidadeLinear > velocidade 
+				&& !flagStopTampa2) {
 			flagStopTampa1 = true;
 			//tampa1.getBody().setAwake(false);
 		}
-		if (velocidadeLinear < velocidade && flagStopTampa1) {
+		if (velocidadeLinear < velocidade && 
+				flagStopTampa1 &&
+				Math.abs(tampa2.getBody().getLinearVelocity().x) < 2) {
 			tampa1.getBody().setAwake(false);
 			flagStopTampa1 = false;
 			turnAnimation = new TurnAnimation(2);
@@ -134,11 +139,14 @@ public class TampinhaWorld {
 	 */
 	private void paraTampa2(float velocidade) {
 		float velocidadeLinear = Math.abs(tampa2.getBody().getLinearVelocity().x);
-		if (velocidadeLinear > velocidade ) {
+		if (velocidadeLinear > velocidade 
+				&& !flagStopTampa1) {
 			flagStopTampa2 = true;
 			//tampa1.getBody().setAwake(false);
 		}
-		if (velocidadeLinear < velocidade && flagStopTampa2) {
+		if (velocidadeLinear < velocidade && 
+				flagStopTampa2 &&
+				Math.abs(tampa1.getBody().getLinearVelocity().x) < 2) {
 			tampa2.getBody().setAwake(false);
 			flagStopTampa2 = false;
 			turnAnimation = new TurnAnimation(1);
