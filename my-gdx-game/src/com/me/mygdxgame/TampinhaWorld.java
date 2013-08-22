@@ -30,6 +30,8 @@ public class TampinhaWorld {
 	public boolean flagStopTampa2 = false;
 	
 	TurnAnimation turnAnimation;
+	MouseDraggedAction dragged;
+	Tampa tampaDaVez;
 	
 	public TampinhaWorld() {
 
@@ -41,6 +43,7 @@ public class TampinhaWorld {
 		this.tampa1 = new Tampa(this, tampa1Position);
 		Vector2 tampa2Position = new Vector2(150*Util.changeX(), 570*Util.changeY());
 		this.tampa2 = new Tampa(this, tampa2Position);
+		tampaDaVez = tampa1;
 		// Cria a Pista
 		this.pista = new Pista(this);
 		turnAnimation = new TurnAnimation(1);  // começa com o jogador 1
@@ -102,6 +105,9 @@ public class TampinhaWorld {
 		tampa1.render();
 		tampa2.render();
 		turnAnimation.render();
+		if (dragged != null) {
+			dragged.render();
+		}
 	}
 	
 	/**
@@ -160,4 +166,7 @@ public class TampinhaWorld {
 		return this.tampa2;
 	}
 
+	public Tampa getTampaDaVez() {
+		return tampaDaVez;
+	}
 }
