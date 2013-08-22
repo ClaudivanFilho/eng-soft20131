@@ -1,18 +1,11 @@
 package com.me.mygdxgame;
 
-import java.util.Vector;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Joint;
-import com.badlogic.gdx.physics.box2d.JointDef;
-import com.badlogic.gdx.physics.box2d.JointDef.JointType;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 
@@ -26,7 +19,6 @@ public class GdxGameInputProcessor implements InputProcessor {
 	private Tampa tampa2;
 	private Tampa tampaDaVez;
 	private boolean vezDoJogador;
-	private MouseJoint joint;
 
 	public GdxGameInputProcessor(Camera camera, TampinhaWorld world) {
 		this.camera = camera;
@@ -56,7 +48,7 @@ public class GdxGameInputProcessor implements InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		if (!world.flagStopTampa1 && !world.flagStopTampa2) {
-			joint = world.createMouseJoint(tampaDaVez.getBody());
+			world.createMouseJoint(tampaDaVez.getBody());
 			return true;
 		}
 		return false;
@@ -66,7 +58,8 @@ public class GdxGameInputProcessor implements InputProcessor {
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if (!world.flagStopTampa1 && !world.flagStopTampa2) {
 			jogarTampa();
-			world.getWorld().destroyJoint(joint);
+			
+			world.getWorld().destroyJoint(world.mouseJoint);
 			if (vezDoJogador) {
 				tampaDaVez = tampa2;
 				vezDoJogador = false;
@@ -79,6 +72,9 @@ public class GdxGameInputProcessor implements InputProcessor {
 		return false;
 	}
 	
+	/**
+	 * Quanto um joint é deletado, necessita-se de outro para substituí-lo.
+	 */
 	private void createJointVazio() {
 		MouseJointDef mouseJointDef = new MouseJointDef();
 		Body currentBody = tampaDaVez.getBody();
@@ -86,13 +82,9 @@ public class GdxGameInputProcessor implements InputProcessor {
 		BodyDef mousePointBodyDef = new BodyDef();  
         mousePointBodyDef.position.set(new Vector2(100, 100));
         Body mousePointBody = world.createBody(mousePointBodyDef);
-		
 		mouseJointDef.target.set(tampaDaVez.getBody().getPosition());
 		mouseJointDef.bodyA = mousePointBody;
 		mouseJointDef.bodyB = currentBody;
-		mouseJointDef.collideConnected = false;
-		mouseJointDef.maxForce = 0;
-		mouseJointDef.frequencyHz = 20f;
 		
 		world.getWorld().createJoint(mouseJointDef);
 	}

@@ -1,11 +1,5 @@
 package com.me.mygdxgame;
 
-import java.sql.Time;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -15,11 +9,10 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 
 public class TampinhaWorld {
+	
 	private World world;
 	private Vector2 gravity;
 	private Body currentBody;
-	private MouseJoint mouseJoint;
-
 	private Tampa tampa1;
 	private Tampa tampa2;
 	private Pista pista;
@@ -29,6 +22,8 @@ public class TampinhaWorld {
 	static final int BOX_POSITION_ITERATIONS = 2;
 	static final float WORLD_TO_BOX = 0.01f;
 	static final float BOX_WORLD_TO = 100f;
+	
+	public MouseJoint mouseJoint;
 	
 	// se a flagStop estiver true indica que tem alguma tampa em movimento.
 	public boolean flagStopTampa1 = false;
@@ -100,8 +95,6 @@ public class TampinhaWorld {
 				+ " Y: " + tampa1.getBody().getLinearVelocity().x);
 		*/
 		
-		System.out.println("TAMPA 1: " + tampa1.getBody().getLinearVelocity().x );
-		System.out.println("TAMPA 2: " + tampa2.getBody().getLinearVelocity().x );
 		paraTampa1((float) 2.5);
 		paraTampa2((float) 2.5);
 
@@ -114,16 +107,19 @@ public class TampinhaWorld {
 	/**
 	 * Para a tampa1 ao chegar em uma determinada velocidade
 	 * 
-	 * @param tampa
+	 * @param velocidade
 	 */
 	private void paraTampa1(float velocidade) {
-		float velocidadeLinear = Math.abs(tampa1.getBody().getLinearVelocity().x);
-		if (velocidadeLinear > velocidade 
-				&& !flagStopTampa2) {
+		float velocidadeX = Math.abs(tampa1.getBody().getLinearVelocity().x);
+		float velocidadeY = Math.abs(tampa1.getBody().getLinearVelocity().y);
+		if ((velocidadeX > velocidade
+				|| velocidadeY > velocidade)
+				&& !flagStopTampa2){
 			flagStopTampa1 = true;
 			//tampa1.getBody().setAwake(false);
 		}
-		if (velocidadeLinear < velocidade && 
+		if (velocidadeX < velocidade &&
+				velocidadeY < velocidade &&
 				flagStopTampa1 &&
 				Math.abs(tampa2.getBody().getLinearVelocity().x) < 2) {
 			tampa1.getBody().setAwake(false);
@@ -135,16 +131,19 @@ public class TampinhaWorld {
 	/**
 	 * Para a tampa2 ao chegar em uma determinada velocidade
 	 * 
-	 * @param tampa
+	 * @param velocidade
 	 */
 	private void paraTampa2(float velocidade) {
-		float velocidadeLinear = Math.abs(tampa2.getBody().getLinearVelocity().x);
-		if (velocidadeLinear > velocidade 
+		float velocidadeX = Math.abs(tampa2.getBody().getLinearVelocity().x);
+		float velocidadeY = Math.abs(tampa2.getBody().getLinearVelocity().y);
+		if ((velocidadeX > velocidade
+				|| velocidadeY > velocidade)
 				&& !flagStopTampa1) {
 			flagStopTampa2 = true;
 			//tampa1.getBody().setAwake(false);
 		}
-		if (velocidadeLinear < velocidade && 
+		if (velocidadeX < velocidade &&
+				velocidadeY < velocidade && 
 				flagStopTampa2 &&
 				Math.abs(tampa1.getBody().getLinearVelocity().x) < 2) {
 			tampa2.getBody().setAwake(false);
@@ -154,7 +153,6 @@ public class TampinhaWorld {
 	}
 
 	public Tampa getTampa1() {
-
 		return this.tampa1;
 	}
 
