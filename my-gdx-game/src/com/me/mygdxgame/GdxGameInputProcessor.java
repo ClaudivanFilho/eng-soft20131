@@ -23,7 +23,6 @@ public class GdxGameInputProcessor implements InputProcessor {
 		this.tampa1 = world.getTampa1();
 		this.tampa2 = world.getTampa2();
 		this.vezDoJogador = true;
-
 	}
 
 	@Override
@@ -116,16 +115,13 @@ public class GdxGameInputProcessor implements InputProcessor {
 		Vector2 currentMousePosition = new Vector2(x, Math.abs(y
 				- camera.viewportHeight));
 
-		// System.out.println(currentMousePosition.x + ", " +
-		// currentMousePosition.y);
-
 		float x1 = currentMousePosition.x;
 		float x2 = world.tampaDaVez.getBody().getPosition().x;
 		float y1 = currentMousePosition.y;
 		float y2 = world.tampaDaVez.getBody().getPosition().y;
 		double distancia = Math.sqrt(Math.pow((x1 - x2), 2)
 				+ Math.pow((y1 - y2), 2));
-		// Cálculo da Direção do Impulso contrario ao mousejoint.position
+		// calculo da Direcao do Impulso contrario ao mousejoint.position
 		Vector2 direcao = currentMousePosition.sub(world.tampaDaVez.getBody()
 				.getPosition());
 		direcao.nor();

@@ -122,7 +122,6 @@ public class TampinhaWorld {
 				|| velocidadeY > velocidade)
 				&& !flagStopTampa2){
 			flagStopTampa1 = true;
-			//tampa1.getBody().setAwake(false);
 		}
 		if (velocidadeX < velocidade &&
 				velocidadeY < velocidade &&
@@ -146,7 +145,6 @@ public class TampinhaWorld {
 				|| velocidadeY > velocidade)
 				&& !flagStopTampa1) {
 			flagStopTampa2 = true;
-			//tampa1.getBody().setAwake(false);
 		}
 		if (velocidadeX < velocidade &&
 				velocidadeY < velocidade && 

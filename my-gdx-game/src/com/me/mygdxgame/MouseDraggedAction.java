@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class MouseDraggedAction {
@@ -12,13 +13,16 @@ public class MouseDraggedAction {
 	TampinhaWorld world;
 	Camera camera;
 	SpriteBatch batchImagem;
-	Texture textura;
+	TextureRegion textura;
 	Sprite spriteImagem;
 	
-	float originalX;
-	float originalY;
-	float atualX;
-	float atualY;
+	float originalX; // posicao original do drag
+	float originalY; // posicao original do drag
+	float atualX; // posicao atual do drag
+	float atualY; // posicao atual do drag
+	
+	boolean estaEmCima = false;
+	
 	
 	/**
 	 * Inicia à ação dragged
@@ -30,8 +34,8 @@ public class MouseDraggedAction {
 		
 		this.world = world;
 		this.camera = camera;
-		textura = new Texture(Gdx.files.internal("data/seta.png"));
-		spriteImagem = new Sprite(textura);
+		textura = new TextureRegion(new Texture(Gdx.files.internal("data/seta.png")));
+		
 		
 		originalX = Gdx.input.getX();
 		originalY = Gdx.input.getY();
@@ -39,6 +43,7 @@ public class MouseDraggedAction {
 		Vector2 currentMousePosition = new Vector2(originalX, 
 				Math.abs(originalY - this.camera.viewportHeight));
 		this.world.getMouseJoint().setTarget(currentMousePosition);
+		
 		atualizacordenadas();
 	}
 	
@@ -60,8 +65,37 @@ public class MouseDraggedAction {
 	 * atualiza as dimensões da imagem.
 	 */
 	private void atualizaImagem() {
-		spriteImagem.setSize(64, 64 + Math.abs(originalY-atualY));
+		
+		Tampa tampa = world.getTampaDaVez();
+		spriteImagem = new Sprite(textura);
 		batchImagem = new SpriteBatch();
+		spriteImagem.setOrigin((float)32.0, (float)0.0);
+		spriteImagem.rotate90(true);
+		spriteImagem.rotate90(true);
+		
+		double diferencay = atualY - Math.abs(tampa.getBody().getPosition().y - camera.viewportHeight) ;
+		double diferencax = atualX - tampa.getBody().getPosition().x ;
+		
+		//rotaciona a imagem em 180 graus
+		if (diferencay < 0) {
+			estaEmCima = true; //a seta esta em cima
+		} else if (diferencay > 0 ) {
+			estaEmCima = false; //esta em baixo
+		}
+		
+		double angulo = 0;
+		// calcula o angula entre a tampa e a posicao do toque.
+		if (diferencay != 0) {
+			angulo = Math.atan(diferencax/diferencay);
+		}
+		
+		// aplica a rotacao na imagem.
+		if (!estaEmCima) {
+			spriteImagem.rotate((int)(angulo*60) + 180);
+		} else {
+			spriteImagem.rotate((int)(angulo*60));
+		}
+		
 	}
 	
 	/**
@@ -71,23 +105,13 @@ public class MouseDraggedAction {
 		Tampa tampa = world.getTampaDaVez();
 		batchImagem.begin();
 		
-		// diferenca entre a posição y pressionada no começo para a posição y
-		// atual.
-		int diferenca = (int) Math.abs(originalY-atualY);
-		
-		// seta a posição da imagem
+		// desenha a imagem da seta na tampa
 		spriteImagem.setPosition(tampa.getBody().getPosition().x-32
-				, (tampa.getBody().getPosition().y-64) - diferenca);
-		
+					, (tampa.getBody().getPosition().y));
+			
 		spriteImagem.draw(batchImagem);
-
-		// desenha a imagem relativa à tampa atual e resimensiona a imagem para
-		// a diferenca y.
-		batchImagem.draw(textura, originalX, originalY, 50, 
-				50 + diferenca, 
-				textura.getWidth(),	textura.getHeight());
-
 		spriteImagem.draw(batchImagem, 100);
+		
 		batchImagem.end();
 	}
 }
