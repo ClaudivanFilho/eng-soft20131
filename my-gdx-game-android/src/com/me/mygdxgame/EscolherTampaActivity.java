@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class EscolherTampaActivity extends Activity {
 
@@ -16,7 +17,7 @@ public class EscolherTampaActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_escolhertampa);
 
-		Button butaoVoltar = (Button) findViewById(R.id.butao_voltarTampa);
+		ImageButton butaoVoltar = (ImageButton) findViewById(R.id.butao_voltarTampa);
 		butaoVoltar.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -25,7 +26,7 @@ public class EscolherTampaActivity extends Activity {
 			}
 		});
 
-		Button butaoTampa1 = (Button) findViewById(R.id.butao_tampa1);
+		ImageButton butaoTampa1 = (ImageButton) findViewById(R.id.butao_tampa1);
 		butaoTampa1.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -36,7 +37,7 @@ public class EscolherTampaActivity extends Activity {
 			}
 		});
 
-		Button butaoTampa2 = (Button) findViewById(R.id.butao_tampa2);
+		ImageButton butaoTampa2 = (ImageButton) findViewById(R.id.butao_tampa2);
 		butaoTampa2.setOnClickListener(new OnClickListener() {
 
 			@Override

@@ -3,26 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/butao_campeonato"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
-        android:text="@string/name_campeonato" />
-
-    <Button
-        android:id="@+id/butao_arcade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/butao_campeonato"
-        android:layout_alignRight="@+id/butao_campeonato"
-        android:layout_below="@+id/butao_campeonato"
-        android:layout_marginTop="46dp"
-        android:text="@string/name_arcade" />
+    android:orientation="vertical" 
+     android:background="@drawable/background">
 
     <Button
         android:id="@+id/butao_menu2"
@@ -31,7 +13,25 @@
         android:layout_alignLeft="@+id/butao_arcade"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/butao_arcade"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="128dp"
         android:text="@string/name_menu" />
+
+    <Button
+        android:id="@+id/butao_arcade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/butao_campeonato"
+        android:layout_alignRight="@+id/butao_campeonato"
+        android:layout_centerVertical="true"
+        android:text="@string/name_arcade" />
+
+    <Button
+        android:id="@+id/butao_campeonato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/butao_arcade"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="64dp"
+        android:text="@string/name_campeonato" />
 
 </RelativeLayout>
