@@ -1,6 +1,7 @@
 package com.me.mygdxgame;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import aurelienribon.bodyeditor.BodyEditorLoader;
 
@@ -15,8 +16,10 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Pista {
 	private TampinhaWorld world;
@@ -27,6 +30,10 @@ public class Pista {
 	private SpriteBatch spriteBatch;
 	private Vector2 speedWayBodyOrigin;
 	private Vector2 speedWayPosition;
+	private CheckPoint checkPoint1;
+	private CheckPoint checkPoint2;
+	private CheckPoint checkPoint3;
+	private CheckPoint checkPoint4;
 
 	public Pista(TampinhaWorld world) {
 		this.world = world;
@@ -34,74 +41,128 @@ public class Pista {
 		criarImagemDaPista();
 
 	}
-
-	private void criarPista() {
-		// 0. Create a loader for the file saved from the editor.
-	    BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("data" + File.separator + "teste-body-editor.json"));
-	 
-	    // 1. Create a BodyDef, as usual.
-	    BodyDef bd = new BodyDef();
-	    speedWayPosition = new Vector2(0*Util.changeX() , 0*Util.changeX());//TODO padronizar as posições
-	    bd.position.set(speedWayPosition);
-	    bd.type = BodyType.StaticBody;
-	    
-	    // 2. Create a FixtureDef, as usual.
-	    FixtureDef fd = new FixtureDef();
-	    fd.density = 1;
-	    fd.friction = 0.5f;
-	    fd.restitution = 0.3f;
-	    fd.isSensor = true;
-	    
-	    speedwayBody = world.createBody(bd);
-	    speedwayBody.setUserData("Pista");
-	    float SPEEDWAY_WIDTH = 1024*Util.changeX();
-		// 4. Create the body fixture automatically by using the loader.
-	    loader.attachFixture(speedwayBody, "pista1", fd, SPEEDWAY_WIDTH );
-	    speedWayBodyOrigin = loader.getOrigin("pista1", SPEEDWAY_WIDTH).cpy();
-		
+	
+	
+	public void initCheckPoints(){
+		// check point
+				 checkPoint1 = new CheckPoint(this.world,140f* Util.changeX(), 600f* Util.changeY(), 0.1f, 40f,"checkPoint1");
+				 checkPoint2 = new CheckPoint(this.world,780f* Util.changeX(), 840f* Util.changeY(), 0.5f, 40f,"checkPoint2");
+				 checkPoint3 = new CheckPoint(this.world,150f* Util.changeX(), 140f* Util.changeY(), 0.6f, 40f,"checkPoint3");
+				 checkPoint4 = new CheckPoint(this.world,808f* Util.changeX(), 140f* Util.changeY(), -0.5f, 40f,"checkPoint4");
 	}
 	
+	
+	private void criarPista() {
+		// 0. Create a loader for the file saved from the editor.
+		BodyEditorLoader loader = new BodyEditorLoader(
+				Gdx.files.internal("data" + File.separator
+						+ "teste-body-editor.json"));
+
+		// 1. Create a BodyDef, as usual.
+		BodyDef bd = new BodyDef();
+		speedWayPosition = new Vector2(0 * Util.changeX(), 0 * Util.changeX());// TODO
+																				// padronizar
+																				// as
+																				// posições
+		bd.position.set(speedWayPosition);
+		bd.type = BodyType.StaticBody;
+
+		// 2. Create a FixtureDef, as usual.
+		FixtureDef fd = new FixtureDef();
+		fd.density = 1;
+		fd.friction = 0.5f;
+		fd.restitution = 0.3f;
+		fd.isSensor = true;
+		speedwayBody = world.createBody(bd);
+		speedwayBody.setUserData("Pista");
+		float SPEEDWAY_WIDTH = 1024*Util.changeX() ;
+		
+		// 4. Create the body fixture automatically by using the loader.
+		loader.attachFixture(speedwayBody, "pista1", fd, SPEEDWAY_WIDTH);
+		speedWayBodyOrigin = loader.getOrigin("pista1", SPEEDWAY_WIDTH).cpy();
+		speedWayBodyOrigin.mul(0.1f,0.1f);
+		initCheckPoints();
+	}
+
+	public CheckPoint getCheckPoint1() {
+		return checkPoint1;
+	}
+
+
+	public void setCheckPoint1(CheckPoint checkPoint1) {
+		this.checkPoint1 = checkPoint1;
+	}
+
+
+	public CheckPoint getCheckPoint2() {
+		return checkPoint2;
+	}
+
+
+	public void setCheckPoint2(CheckPoint checkPoint2) {
+		this.checkPoint2 = checkPoint2;
+	}
+
+
+	public CheckPoint getCheckPoint3() {
+		return checkPoint3;
+	}
+
+
+	public void setCheckPoint3(CheckPoint checkPoint3) {
+		this.checkPoint3 = checkPoint3;
+	}
+
+
+	public CheckPoint getCheckPoint4() {
+		return checkPoint4;
+	}
+
+
+	public void setCheckPoint4(CheckPoint checkPoint4) {
+		this.checkPoint4 = checkPoint4;
+	}
+
+
 	private void criarImagemDaPista() {
 		texture = new Texture(imageURL);
 
 		// setting a filter is optional, default = Nearest
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
+
 		// binding texture to sprite and setting some attributes
 		sprite = new Sprite(texture);
-		sprite.setSize(1024*Util.changeX(),1024*Util.changeY());
-		//sprite.setScale(60f);
-		//sprite.setPosition(500,500);//TODO padronizar as posições
+		sprite.setSize(1024 * Util.changeX(), 1024 * Util.changeY());
+		// sprite.setScale(60f);
+		// sprite.setPosition(500,500);//TODO padronizar as posições
 
 		spriteBatch = new SpriteBatch();
 
 	}
-	
+
 	public void render() {
-		
-		
-	    
+
 		spriteBatch.begin();
-		//Setting the position
+		// Setting the position
 		Vector2 pistaPos = speedwayBody.getPosition().sub(speedWayBodyOrigin);
-		
-	    sprite.setPosition(pistaPos.x, pistaPos.y);
-	    sprite.setOrigin(speedWayBodyOrigin.x, speedWayBodyOrigin.y);
-	    sprite.setRotation(speedwayBody.getAngle() * MathUtils.radiansToDegrees);
-	    
+
+		sprite.setPosition(pistaPos.x, pistaPos.y);
+		sprite.setOrigin(speedWayBodyOrigin.x, speedWayBodyOrigin.y);
+		sprite.setRotation(speedwayBody.getAngle() * MathUtils.radiansToDegrees);
+
 		// this is only one possible drawing out of many
-	    TextureRegion region = new TextureRegion(texture, 0, 0, 720,960);
-	    spriteBatch.draw(region, 0,0,1024*Util.changeX(),1024*Util.changeY());
+		TextureRegion region = new TextureRegion(texture, 0, 0, 720, 960);
+		//spriteBatch.draw(region, 0,0,1024*Util.changeX(),1024*Util.changeY());
 		// this is another one
-	    
+
 		// and a third...
-		//sprite.draw(spriteBatch, 100);
-		//sprite.draw(spriteBatch);
+		// sprite.draw(spriteBatch, 100);
+		// sprite.draw(spriteBatch);
 
 		spriteBatch.end();
 
 		// re-enable GL state... (if you need it)
-//		Gdx.gl.glEnable(GL10.GL_CULL_FACE);
+		// Gdx.gl.glEnable(GL10.GL_CULL_FACE);
 
 	}
 

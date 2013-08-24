@@ -22,9 +22,51 @@ public class Tampa {
 	private Vector2 position;
 	private boolean reset = false;
 	private String id;
+	private final float width = 56f;
+	private boolean checkPointComplete1 = false;
+	private boolean checkPointComplete2 = false;
+	private boolean checkPointComplete3 = false;
+	private boolean checkPointComplete4 = false;
+
 	
 	
 	
+	public boolean isCheckPointComplete1() {
+		return checkPointComplete1;
+	}
+
+	public boolean isRaceComplete(){
+		return checkPointComplete1 && checkPointComplete2 && checkPointComplete3 && checkPointComplete4;
+	}
+	
+	public void setCheckPointComplete1(boolean checkPointComplete1) {
+		this.checkPointComplete1 = checkPointComplete1;
+	}
+
+	public boolean isCheckPointComplete2() {
+		return checkPointComplete2;
+	}
+
+	public void setCheckPointComplete2(boolean checkPointComplete2) {
+		this.checkPointComplete2 = checkPointComplete2;
+	}
+
+	public boolean isCheckPointComplete3() {
+		return checkPointComplete3;
+	}
+
+	public void setCheckPointComplete3(boolean checkPointComplete3) {
+		this.checkPointComplete3 = checkPointComplete3;
+	}
+
+	public boolean isCheckPointComplete4() {
+		return checkPointComplete4;
+	}
+
+	public void setCheckPointComplete4(boolean checkPointComplete4) {
+		this.checkPointComplete4 = checkPointComplete4;
+	}
+
 	public boolean isReset() {
 		return reset;
 	}
@@ -48,9 +90,9 @@ public class Tampa {
 		circleBodyDef.angularDamping = 10f;
 		circleBodyDef.linearDamping = 0.6f;
 		circleBody = world.createBody(circleBodyDef);
-		circleBody.setUserData(id);
+		circleBody.setUserData("Tampa");
 		CircleShape dynamicCircle = new CircleShape();
-		dynamicCircle.setRadius(16*Util.changeX());
+		dynamicCircle.setRadius((width/2)*Util.changeX());
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = dynamicCircle;
 		fixtureDef.density = 1.0f;
@@ -70,7 +112,7 @@ public class Tampa {
 
 		// binding texture to sprite and setting some attributes
 		sprite = new Sprite(texture);
-		sprite.setSize(32*Util.changeX(), 32*Util.changeY());
+		sprite.setSize(width*Util.changeX(), width*Util.changeX());
 		sprite.setPosition(circleBody.getPosition().x - 16,
 				circleBody.getPosition().y - 16);
 
@@ -92,15 +134,15 @@ public class Tampa {
 
 	public void render() {
 		spriteBatch.begin();
-		sprite.setPosition(circleBody.getPosition().x - 16*Util.changeX(),
-				circleBody.getPosition().y - 16*Util.changeY());
+		sprite.setPosition(circleBody.getPosition().x - (width/2)*Util.changeX(),
+				circleBody.getPosition().y - (width/2)*Util.changeX());
 
 		// this is only one possible drawing out of many
 		sprite.draw(spriteBatch);
 
 		// this is another one
 		spriteBatch.draw(texture, circleBody.getPosition().x,
-				circleBody.getPosition().y, 32, 32, texture.getWidth(),
+				circleBody.getPosition().y, (int)width,(int) width, texture.getWidth(),
 				texture.getHeight());
 
 		// and a third...

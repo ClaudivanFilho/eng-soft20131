@@ -43,20 +43,31 @@ public class TampinhaWorld {
 		this.gravity = new Vector2();
 		this.world = new World(gravity, true);
 		// Cria as duas tampas
-		Vector2 tampa1Position = new Vector2(100 * Util.changeX(),
+		Vector2 tampa1Position = new Vector2(80 * Util.changeX(),
 				564 * Util.changeY());
 		this.tampa1 = new Tampa(this, tampa1Position, "Tampa1");
-		Vector2 tampa2Position = new Vector2(150 * Util.changeX(),
+		Vector2 tampa2Position = new Vector2(170 * Util.changeX(),
 				570 * Util.changeY());
 		this.tampa2 = new Tampa(this, tampa2Position, "Tampa2");
 		tampaDaVez = tampa1;
 		// Cria a Pista
 		this.pista = new Pista(this);
+	
+		
+		
 		turnAnimation = new TurnAnimation(1); // começa com o jogador 1
 		// Adding the contact listener
-		ContactListener listener = new MyContactListener(tampa1, tampa2);
+		ContactListener listener = new MyContactListener(this);
 		world.setContactListener(listener);
 	}
+	
+	
+
+	public Pista getPista() {
+		return pista;
+	}
+
+
 
 	public World getWorld() {
 		return world;
@@ -192,7 +203,7 @@ public class TampinhaWorld {
 		}
 		if (tampa2.isReset()) {
 			tampa2.getBody().setTransform(tampa2PositionTemp, 0f);
-			tampa1.setReset(false);
+			tampa2.setReset(false);
 		}
 
 	}
