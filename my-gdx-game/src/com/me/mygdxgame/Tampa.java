@@ -20,8 +20,21 @@ public class Tampa {
 	private Sprite sprite;
 	private Texture texture;
 	private Vector2 position;
+	private boolean reset = false;
+	private String id;
+	
+	
+	
+	public boolean isReset() {
+		return reset;
+	}
 
-	public Tampa(TampinhaWorld world, Vector2 tampa1Position) {
+	public void setReset(boolean reset) {
+		this.reset = reset;
+	}
+
+	public Tampa(TampinhaWorld world, Vector2 tampa1Position,String id) {
+		this.id = id;
 		this.position = tampa1Position;
 		createCircleBody(world, this.position);
 		createImage();
@@ -29,12 +42,13 @@ public class Tampa {
 
 	private void createCircleBody(TampinhaWorld world, Vector2 position) {
 		BodyDef circleBodyDef = new BodyDef();
+		
 		circleBodyDef.type = BodyType.DynamicBody;
 		circleBodyDef.position.set(position);
 		circleBodyDef.angularDamping = 10f;
 		circleBodyDef.linearDamping = 0.6f;
 		circleBody = world.createBody(circleBodyDef);
-
+		circleBody.setUserData(id);
 		CircleShape dynamicCircle = new CircleShape();
 		dynamicCircle.setRadius(16*Util.changeX());
 		FixtureDef fixtureDef = new FixtureDef();

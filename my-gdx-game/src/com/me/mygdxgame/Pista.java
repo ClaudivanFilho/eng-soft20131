@@ -53,7 +53,7 @@ public class Pista {
 	    fd.isSensor = true;
 	    
 	    speedwayBody = world.createBody(bd);
-	 
+	    speedwayBody.setUserData("Pista");
 	    float SPEEDWAY_WIDTH = 1024*Util.changeX();
 		// 4. Create the body fixture automatically by using the loader.
 	    loader.attachFixture(speedwayBody, "pista1", fd, SPEEDWAY_WIDTH );

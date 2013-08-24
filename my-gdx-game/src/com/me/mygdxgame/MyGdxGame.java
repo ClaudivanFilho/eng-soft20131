@@ -47,6 +47,7 @@ public class MyGdxGame implements ApplicationListener {
 	public void render() {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		debugRenderer.render(tampinhaWorld.getWorld(), camera.combined);
+		
 		tampinhaWorld.render();
 	}
 

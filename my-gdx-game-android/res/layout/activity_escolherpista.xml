@@ -10,7 +10,7 @@
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/horizontalScrollView1"
+         android:layout_alignParentBottom="true"
         android:layout_marginLeft="14dp"
         android:background="@null"
         android:src="@drawable/undo" />
@@ -20,7 +20,7 @@
          android:layout_width="64dp"
          android:layout_height="wrap_content"
          android:layout_alignParentRight="true"
-         android:layout_below="@+id/horizontalScrollView1"
+         android:layout_alignParentBottom="true"
          android:layout_marginRight="14dp"
          android:background="@null"
          android:src="@drawable/clean" />

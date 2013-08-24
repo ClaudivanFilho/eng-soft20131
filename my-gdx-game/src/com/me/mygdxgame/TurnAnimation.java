@@ -61,9 +61,7 @@ public class TurnAnimation {
 			stateTime += Gdx.graphics.getDeltaTime();
 			currentFrame = walkAnimation.getKeyFrame(stateTime, true);
 			spriteBatch.begin();
-			spriteBatch.draw(currentFrame,
-					(Gdx.graphics.getWidth()/2)-130, 
-					Gdx.graphics.getHeight()/2);
+			spriteBatch.draw(currentFrame, 100, 320);
 			spriteBatch.end();
 		}
 	}

@@ -2,36 +2,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MainActivity" >
 
-    tools:context=".MainActivity"
-     android:background="@drawable/background" >
+    <Button
+        android:id="@+id/butao_opcoes"
+        style="@style/main_menu_btnTop"
+        android:layout_centerVertical="true"
+        android:background="@drawable/butao"
+        android:text="@string/name_opcoes" />
 
-     <Button
-         android:id="@+id/butao_sair"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/butao_opcoes"
-         android:layout_alignRight="@+id/butao_opcoes"
-         android:layout_below="@+id/butao_opcoes"
-         android:layout_marginTop="70dp"
-         android:text="@string/name_sair" />
+    <Button
+        android:id="@+id/butao_jogar"
+        style="@style/main_menu_btnTop"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="93dp"
+        android:background="@drawable/butao"
+        android:text="@string/name_jogar" />
 
-     <Button
-         android:id="@+id/butao_opcoes"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_centerHorizontal="true"
-         android:layout_centerVertical="true"
-         android:text="@string/name_opcoes" />
-
-     <Button
-         android:id="@+id/butao_jogar"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_above="@+id/butao_opcoes"
-         android:layout_alignLeft="@+id/butao_opcoes"
-         android:layout_alignRight="@+id/butao_opcoes"
-         android:layout_marginBottom="58dp"
-         android:text="@string/name_jogar" />
+    <Button
+        android:id="@+id/butao_sair"
+        style="@style/main_menu_btnTop"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="93dp"
+        android:background="@drawable/butao"
+        android:text="@string/name_sair" />
 
 </RelativeLayout>

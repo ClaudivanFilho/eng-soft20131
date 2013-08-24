@@ -1,57 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
      android:background="@drawable/background" >
 
      <ImageButton
-         android:id="@+id/butao_tampa1"
+         android:id="@+id/butao_voltarTampa"
          android:layout_width="64dp"
-         android:layout_height="64dp"
-         android:layout_marginBottom="107dp"
-         android:layout_x="75dp"
-         android:layout_y="264dp"
-         android:background="@null"
-         android:src="@drawable/tampa1_icon" />
-
-     <ImageButton
-         android:id="@+id/butao_tampa2"
-         android:layout_width="64dp"
-         android:layout_height="64dp"
-         android:layout_marginBottom="66dp"
-         android:layout_marginLeft="38dp"
-         android:layout_x="78dp"
-         android:layout_y="167dp"
-         android:background="@null"
-         android:src="@drawable/tampa2_icon" />
-
-     <CheckedTextView
-         android:id="@+id/checkedTextView1"
-         android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_marginBottom="18dp"
-         android:layout_x="143dp"
-         android:layout_y="189dp"
-         android:text="@string/name_tampa1"
-         android:textSize="20dp" />
-
-     <CheckedTextView
-         android:id="@+id/checkedTextView2"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginBottom="16dp"
-         android:layout_x="145dp"
-         android:layout_y="290dp"
-         android:text="@string/name_tampa2"
-         android:textSize="20dp" />
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentLeft="true"
+         android:background="@null"
+         android:src="@drawable/undo" />
 
      <ImageButton
          android:id="@+id/butao_iniciarPartida"
          android:layout_width="64dp"
          android:layout_height="wrap_content"
-         android:layout_x="245dp"
-         android:layout_y="482dp"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentRight="true"
          android:background="@null"
          android:src="@drawable/clean" />
 
@@ -59,20 +27,51 @@
          android:id="@+id/checkedTextView3"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_marginTop="41dp"
-         android:layout_x="60dp"
-         android:layout_y="53dp"
+         android:layout_alignParentTop="true"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="40dp"
          android:text="@string/name_escolhertampa"
          android:textSize="24sp" />
 
      <ImageButton
-         android:id="@+id/butao_voltarTampa"
+         android:id="@+id/butao_tampa2"
          android:layout_width="64dp"
-         android:layout_height="wrap_content"
-         android:layout_marginBottom="39dp"
-         android:layout_x="23dp"
-         android:layout_y="486dp"
+         android:layout_height="64dp"
+         android:layout_alignLeft="@+id/butao_tampa1"
+         android:layout_below="@+id/butao_tampa1"
+         android:layout_marginTop="104dp"
          android:background="@null"
-         android:src="@drawable/undo" />
+         android:src="@drawable/tampa2_icon" />
 
-</AbsoluteLayout>
+     <ImageButton
+         android:id="@+id/butao_tampa1"
+         android:layout_width="64dp"
+         android:layout_height="64dp"
+         android:layout_below="@+id/checkedTextView3"
+         android:layout_marginTop="89dp"
+         android:layout_toRightOf="@+id/butao_voltarTampa"
+         android:background="@null"
+         android:src="@drawable/tampa1_icon" />
+
+     <CheckedTextView
+         android:id="@+id/checkedTextView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBottom="@+id/butao_tampa1"
+         android:layout_alignLeft="@+id/checkedTextView2"
+         android:layout_marginBottom="16dp"
+         android:text="Tampa 1"
+         android:textSize="20dp" />
+
+     <CheckedTextView
+         android:id="@+id/checkedTextView2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBottom="@+id/butao_tampa2"
+         android:layout_marginBottom="18dp"
+         android:layout_marginLeft="15dp"
+         android:layout_toRightOf="@+id/butao_tampa2"
+         android:text="Tampa 2"
+         android:textSize="20dp" />
+
+</RelativeLayout>
