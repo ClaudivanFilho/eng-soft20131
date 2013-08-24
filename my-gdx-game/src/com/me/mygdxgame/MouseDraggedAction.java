@@ -12,9 +12,14 @@ public class MouseDraggedAction {
 
 	TampinhaWorld world;
 	Camera camera;
-	SpriteBatch batchImagem;
-	TextureRegion textura;
-	Sprite spriteImagem;
+	
+	TextureRegion texturaHead;
+	Sprite spriteHead;
+	SpriteBatch batchHead;
+	
+	TextureRegion texturaBody;
+	Sprite spriteBody;
+	SpriteBatch batchBody;
 	
 	float originalX; // posicao original do drag
 	float originalY; // posicao original do drag
@@ -34,8 +39,9 @@ public class MouseDraggedAction {
 		
 		this.world = world;
 		this.camera = camera;
-		textura = new TextureRegion(new Texture(Gdx.files.internal("data/seta.png")));
 		
+		texturaHead = new TextureRegion(new Texture(Gdx.files.internal("data/seta-head.png")));
+		texturaBody = new TextureRegion(new Texture(Gdx.files.internal("data/seta-corpo.png")));
 		
 		originalX = Gdx.input.getX();
 		originalY = Gdx.input.getY();
@@ -44,13 +50,13 @@ public class MouseDraggedAction {
 				Math.abs(originalY - this.camera.viewportHeight));
 		this.world.getMouseJoint().setTarget(currentMousePosition);
 		
-		atualizacordenadas();
+		atualizacordenadasHead();
 	}
 	
 	/**
 	 * atualiza as cordenadas quando existe um dragged(puxar).
 	 */
-	public void atualizacordenadas() {
+	public void atualizacordenadasHead() {
 		atualX = Gdx.input.getX();
 		atualY = Gdx.input.getY();
 		
@@ -58,20 +64,31 @@ public class MouseDraggedAction {
 				Math.abs(atualY - this.camera.viewportHeight));
 		this.world.getMouseJoint().setTarget(currentMousePosition);
 		
-		atualizaImagem();
+		atualizaImagemHead();
 	}
 	
 	/**
 	 * atualiza as dimensões da imagem.
 	 */
-	private void atualizaImagem() {
-		
+	private void atualizaImagemHead() {
 		Tampa tampa = world.getTampaDaVez();
-		spriteImagem = new Sprite(textura);
-		batchImagem = new SpriteBatch();
-		spriteImagem.setOrigin((float)32.0, (float)0.0);
-		spriteImagem.rotate90(true);
-		spriteImagem.rotate90(true);
+		
+		spriteHead = new Sprite(texturaHead);
+		batchHead = new SpriteBatch();
+		spriteHead.setOrigin((float)32.0, (float)0.0);
+		spriteHead.rotate90(true);
+		spriteHead.rotate90(true);
+		
+		spriteBody = new Sprite(texturaBody);
+		batchBody = new SpriteBatch();
+		spriteBody.setOrigin((float)32.0, (float)-10.0);
+		spriteBody.rotate90(true);
+		spriteBody.rotate90(true);  
+			spriteBody.setSize(spriteBody.getWidth(), 
+				spriteBody.getHeight() + 
+						(int)Math.sqrt(Math.pow((atualX-originalX),2) + 
+						Math.pow((atualY-originalY),2)));
+	
 		
 		double diferencay = atualY - Math.abs(tampa.getBody().getPosition().y - camera.viewportHeight) ;
 		double diferencax = atualX - tampa.getBody().getPosition().x ;
@@ -91,9 +108,11 @@ public class MouseDraggedAction {
 		
 		// aplica a rotacao na imagem.
 		if (!estaEmCima) {
-			spriteImagem.rotate((int)(angulo*60) + 180);
+			spriteHead.rotate((int)(angulo*60) + 180);
+			spriteBody.rotate((int)(angulo*60) + 180);
 		} else {
-			spriteImagem.rotate((int)(angulo*60));
+			spriteHead.rotate((int)(angulo*60));
+			spriteBody.rotate((int)(angulo*60));
 		}
 		
 	}
@@ -103,15 +122,27 @@ public class MouseDraggedAction {
 	 */
 	public void render() {
 		Tampa tampa = world.getTampaDaVez();
-		batchImagem.begin();
 		
-		// desenha a imagem da seta na tampa
-		spriteImagem.setPosition(tampa.getBody().getPosition().x-32
-					, (tampa.getBody().getPosition().y));
+		//desenha o corpo da seta
+		batchBody.begin();
+		spriteBody.setPosition(tampa.getBody().getPosition().x-32
+				, (tampa.getBody().getPosition().y+10));
 			
-		spriteImagem.draw(batchImagem);
-		spriteImagem.draw(batchImagem, 100);
+		spriteBody.draw(batchBody);
+		spriteBody.draw(batchBody, 100);
 		
-		batchImagem.end();
+		batchBody.end();
+		
+		batchHead.begin();
+		
+		
+		// desenha a imagem da cabeca da seta na tampa
+		spriteHead.setPosition(tampa.getBody().getPosition().x-32
+					, (tampa.getBody().getPosition().y));
+		
+		spriteHead.draw(batchHead);
+		spriteHead.draw(batchHead, 100);
+		
+		batchHead.end();
 	}
 }
