@@ -1,10 +1,7 @@
 package com.me.mygdxgame;
 
 import java.io.File;
-import java.util.ArrayList;
-
 import aurelienribon.bodyeditor.BodyEditorLoader;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -12,14 +9,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Pista {
 	private TampinhaWorld world;
@@ -152,7 +146,7 @@ public class Pista {
 
 		// this is only one possible drawing out of many
 		TextureRegion region = new TextureRegion(texture, 0, 0, 720, 960);
-		//spriteBatch.draw(region, 0,0,1024*Util.changeX(),1024*Util.changeY());
+		spriteBatch.draw(region, 0,0,1024*Util.changeX(),1024*Util.changeY());
 		// this is another one
 
 		// and a third...

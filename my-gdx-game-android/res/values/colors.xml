@@ -18,5 +18,5 @@
     <color name="menu_text_color">#FFFFFF</color>
     <color name="menu_shadow_color">#000000</color>    
     <color name="black">#000000</color>
-    
+    <color name="white">#FFFFFF</color>
 </resources>

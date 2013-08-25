@@ -33,25 +33,24 @@
          android:text="@string/name_escolhertampa"
          android:textSize="24sp" />
 
-     <ImageButton
+     <Button
          android:id="@+id/butao_tampa2"
          android:layout_width="64dp"
          android:layout_height="64dp"
          android:layout_alignLeft="@+id/butao_tampa1"
          android:layout_below="@+id/butao_tampa1"
          android:layout_marginTop="104dp"
-         android:background="@null"
-         android:src="@drawable/tampa2_icon" />
+         android:background="@drawable/butao_tampa2"
+        />
 
-     <ImageButton
+     <Button
          android:id="@+id/butao_tampa1"
          android:layout_width="64dp"
          android:layout_height="64dp"
          android:layout_below="@+id/checkedTextView3"
          android:layout_marginTop="89dp"
          android:layout_toRightOf="@+id/butao_voltarTampa"
-         android:background="@null"
-         android:src="@drawable/tampa1_icon" />
+         android:background="@drawable/butao_tampa1" />
 
      <CheckedTextView
          android:id="@+id/checkedTextView1"

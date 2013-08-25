@@ -26,47 +26,52 @@ public final class R {
         public static final int red_gradientE=0x7f040003;
         public static final int red_gradientS=0x7f040002;
         public static final int red_stroke=0x7f040001;
+        public static final int white=0x7f04000f;
     }
     public static final class drawable {
         public static final int background=0x7f020000;
         public static final int butao=0x7f020001;
-        public static final int button=0x7f020002;
-        public static final int clean=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int new_button=0x7f020005;
-        public static final int pista_menu=0x7f020006;
-        public static final int pista_menu_selected=0x7f020007;
-        public static final int pista_menu_selected2=0x7f020008;
-        public static final int tampa1_icon=0x7f020009;
-        public static final int tampa2_icon=0x7f02000a;
-        public static final int undo=0x7f02000b;
+        public static final int butao_tampa1=0x7f020002;
+        public static final int butao_tampa2=0x7f020003;
+        public static final int button=0x7f020004;
+        public static final int clean=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int new_button=0x7f020007;
+        public static final int pista_menu=0x7f020008;
+        public static final int pista_menu_selected=0x7f020009;
+        public static final int pista_menu_selected2=0x7f02000a;
+        public static final int tampa1_icon=0x7f02000b;
+        public static final int tampa1_sel=0x7f02000c;
+        public static final int tampa2_icon=0x7f02000d;
+        public static final int tampa2_sel=0x7f02000e;
+        public static final int undo=0x7f02000f;
     }
     public static final class id {
         public static final int butao_arcade=0x7f07000d;
         public static final int butao_avancar=0x7f070001;
         public static final int butao_campeonato=0x7f07000f;
-        public static final int butao_iniciarPartida=0x7f070007;
+        public static final int butao_iniciarPartida=0x7f070008;
         public static final int butao_jogar=0x7f070011;
-        public static final int butao_menu=0x7f070018;
+        public static final int butao_menu=0x7f070017;
         public static final int butao_menu2=0x7f07000e;
         public static final int butao_opcoes=0x7f070010;
         public static final int butao_sair=0x7f070012;
-        public static final int butao_tampa1=0x7f07000a;
-        public static final int butao_tampa2=0x7f070009;
+        public static final int butao_tampa1=0x7f07000b;
+        public static final int butao_tampa2=0x7f07000a;
         public static final int butao_voltar=0x7f070000;
-        public static final int butao_voltarTampa=0x7f070006;
+        public static final int butao_voltarTampa=0x7f070007;
         public static final int butaopista1=0x7f070003;
         public static final int butaopista2=0x7f070004;
         public static final int butaopista3=0x7f070005;
-        public static final int checkedTextView1=0x7f07000b;
+        public static final int checkedTextView1=0x7f070006;
         public static final int checkedTextView2=0x7f07000c;
-        public static final int checkedTextView3=0x7f070008;
+        public static final int checkedTextView3=0x7f070009;
         public static final int horizontalScrollView1=0x7f070002;
         public static final int seekBarMusica=0x7f070013;
         public static final int seekBarSom=0x7f070014;
-        public static final int textView1=0x7f070015;
-        public static final int textView2=0x7f070016;
-        public static final int textView3=0x7f070017;
+        public static final int textView1=0x7f070018;
+        public static final int textView2=0x7f070015;
+        public static final int textView3=0x7f070016;
     }
     public static final class layout {
         public static final int activity_escolherpista=0x7f030000;

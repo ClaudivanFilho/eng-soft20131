@@ -8,8 +8,8 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "my-gdx-game";
 		cfg.useGL20 = false;
-		cfg.height = 640;
-		cfg.width = 480;
+		cfg.height = 960/2;
+		cfg.width = 720/2;
 		
 		new LwjglApplication(new MyGdxGame(), cfg);
 	}

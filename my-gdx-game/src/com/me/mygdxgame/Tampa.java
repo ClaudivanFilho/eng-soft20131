@@ -112,7 +112,7 @@ public class Tampa {
 
 		// binding texture to sprite and setting some attributes
 		sprite = new Sprite(texture);
-		sprite.setSize(width*Util.changeX(), width*Util.changeX());
+		sprite.setSize(width*Util.changeX(), width*Util.changeY());
 		sprite.setPosition(circleBody.getPosition().x - 16,
 				circleBody.getPosition().y - 16);
 

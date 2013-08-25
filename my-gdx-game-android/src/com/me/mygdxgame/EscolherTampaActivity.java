@@ -11,12 +11,21 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class EscolherTampaActivity extends Activity {
-
+	private Button butaoTampa1;
+	private Button butaoTampa2;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_escolhertampa);
 
+		butaoVoltar();
+		butaoIniciarPartida();
+		butaoTampa1();
+		butaoTampa2();
+
+	}
+
+	private void butaoVoltar() {
 		ImageButton butaoVoltar = (ImageButton) findViewById(R.id.butao_voltarTampa);
 		butaoVoltar.setOnClickListener(new OnClickListener() {
 
@@ -25,26 +34,57 @@ public class EscolherTampaActivity extends Activity {
 				finish();
 			}
 		});
+	}
 
-		ImageButton butaoTampa1 = (ImageButton) findViewById(R.id.butao_tampa1);
-		butaoTampa1.setOnClickListener(new OnClickListener() {
+	private void butaoIniciarPartida() {
+		ImageButton butaoIniciarPartida = (ImageButton) findViewById(R.id.butao_iniciarPartida);
+		butaoIniciarPartida.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent inciarJogo = new Intent(EscolherTampaActivity.this,
-						GameActivity.class);
-				startActivity(inciarJogo);
+				iniciarJogo();
 			}
 		});
+	}
 
-		ImageButton butaoTampa2 = (ImageButton) findViewById(R.id.butao_tampa2);
+	
+	private void butaoTampa2() {
+		 butaoTampa2 = (Button) findViewById(R.id.butao_tampa2);
 		butaoTampa2.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				System.out.println("jogar com tampa 2");
+				atualizaSelecao(butaoTampa2);
 			}
 		});
+	}
 
+	private void butaoTampa1() {
+		 butaoTampa1 = (Button) findViewById(R.id.butao_tampa1);
+		butaoTampa1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				atualizaSelecao(butaoTampa1);
+			}
+
+			
+		});
+	}
+	
+	public void setTodosButaoFalse() {
+		butaoTampa1.setSelected(false);
+		butaoTampa2.setSelected(false);
+	}
+
+	private void atualizaSelecao(Button butao) {
+		setTodosButaoFalse();
+		butao.setSelected(true);
+	}
+	
+	private void iniciarJogo() {
+		Intent inciarJogo = new Intent(EscolherTampaActivity.this,
+				GameActivity.class);
+		startActivity(inciarJogo);
 	}
 }

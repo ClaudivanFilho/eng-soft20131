@@ -15,17 +15,18 @@
     <Button
         android:id="@+id/butao_jogar"
         style="@style/main_menu_btnTop"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="93dp"
+        android:layout_above="@+id/butao_opcoes"
+        android:layout_alignBottom="@+id/butao_opcoes"
+        android:layout_marginBottom="92dp"
         android:background="@drawable/butao"
         android:text="@string/name_jogar" />
 
     <Button
         android:id="@+id/butao_sair"
         style="@style/main_menu_btnTop"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="93dp"
+        android:layout_alignTop="@+id/butao_opcoes"
+        android:layout_below="@+id/butao_opcoes"
+        android:layout_marginTop="92dp"
         android:background="@drawable/butao"
         android:text="@string/name_sair" />
 
