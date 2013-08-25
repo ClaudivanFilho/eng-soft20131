@@ -56,8 +56,8 @@ public final class R {
         public static final int butao_menu2=0x7f07000e;
         public static final int butao_opcoes=0x7f070010;
         public static final int butao_sair=0x7f070012;
-        public static final int butao_tampa1=0x7f07000b;
-        public static final int butao_tampa2=0x7f07000a;
+        public static final int butao_tampa1=0x7f07000a;
+        public static final int butao_tampa2=0x7f07000b;
         public static final int butao_voltar=0x7f070000;
         public static final int butao_voltarTampa=0x7f070007;
         public static final int butaopista1=0x7f070003;
@@ -65,13 +65,13 @@ public final class R {
         public static final int butaopista3=0x7f070005;
         public static final int checkedTextView1=0x7f070006;
         public static final int checkedTextView2=0x7f07000c;
-        public static final int checkedTextView3=0x7f070009;
         public static final int horizontalScrollView1=0x7f070002;
         public static final int seekBarMusica=0x7f070013;
         public static final int seekBarSom=0x7f070014;
         public static final int textView1=0x7f070018;
         public static final int textView2=0x7f070015;
         public static final int textView3=0x7f070016;
+        public static final int textoEscolherTampa=0x7f070009;
     }
     public static final class layout {
         public static final int activity_escolherpista=0x7f030000;

@@ -24,7 +24,7 @@
          android:src="@drawable/clean" />
 
      <CheckedTextView
-         android:id="@+id/checkedTextView3"
+         android:id="@+id/textoEscolherTampa"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignParentTop="true"
@@ -34,23 +34,26 @@
          android:textSize="24sp" />
 
      <Button
+         android:id="@+id/butao_tampa1"
+         android:layout_width="64dp"
+         android:layout_height="64dp"
+         android:layout_below="@+id/textoEscolherTampa"
+         android:layout_marginTop="80dp"
+         android:layout_toRightOf="@+id/butao_voltarTampa"
+         android:background="@drawable/butao_tampa1" />
+     
+     
+     <Button
          android:id="@+id/butao_tampa2"
          android:layout_width="64dp"
          android:layout_height="64dp"
          android:layout_alignLeft="@+id/butao_tampa1"
          android:layout_below="@+id/butao_tampa1"
-         android:layout_marginTop="104dp"
+         android:layout_marginTop="80dp"
          android:background="@drawable/butao_tampa2"
         />
 
-     <Button
-         android:id="@+id/butao_tampa1"
-         android:layout_width="64dp"
-         android:layout_height="64dp"
-         android:layout_below="@+id/checkedTextView3"
-         android:layout_marginTop="89dp"
-         android:layout_toRightOf="@+id/butao_voltarTampa"
-         android:background="@drawable/butao_tampa1" />
+     
 
      <CheckedTextView
          android:id="@+id/checkedTextView1"

@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public class Tampa {
-	private String imageURL = "data" + File.separator + "tampa1.png";
+	private String imageURL;;
 	private Body circleBody;
 	private SpriteBatch spriteBatch;
 	private Sprite sprite;
@@ -75,8 +75,9 @@ public class Tampa {
 		this.reset = reset;
 	}
 
-	public Tampa(TampinhaWorld world, Vector2 tampa1Position,String id) {
+	public Tampa(TampinhaWorld world, Vector2 tampa1Position,String id,String imageURL) {
 		this.id = id;
+		this.imageURL = imageURL;
 		this.position = tampa1Position;
 		createCircleBody(world, this.position);
 		createImage();

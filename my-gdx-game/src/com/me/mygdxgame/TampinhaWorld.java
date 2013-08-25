@@ -1,5 +1,7 @@
 package com.me.mygdxgame;
 
+import java.io.File;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -22,6 +24,8 @@ public class TampinhaWorld {
 	static final int BOX_POSITION_ITERATIONS = 2;
 	static final float WORLD_TO_BOX = 0.01f;
 	static final float BOX_WORLD_TO = 100f;
+	private String urlImagemTampa1;
+	private String urlImagemTampa2;
 
 	public MouseJoint mouseJoint;
 
@@ -37,18 +41,23 @@ public class TampinhaWorld {
 	Vector2 tampa2PositionTemp = new Vector2(150 * Util.changeX(),
 			564 * Util.changeY());
 
-	public TampinhaWorld() {
 
+	
+	
+	public TampinhaWorld(String urlImagemTampa1,String urlImagemTampa2) {
+		this.urlImagemTampa1  = urlImagemTampa1;
+		this.urlImagemTampa2 = urlImagemTampa2;
 		// Cria o Mundo
 		this.gravity = new Vector2();
 		this.world = new World(gravity, true);
 		// Cria as duas tampas
 		Vector2 tampa1Position = new Vector2(80 * Util.changeX(),
 				564 * Util.changeY());
-		this.tampa1 = new Tampa(this, tampa1Position, "Tampa1");
+		this.tampa1 = new Tampa(this, tampa1Position, "Tampa1",this.urlImagemTampa1);
 		Vector2 tampa2Position = new Vector2(170 * Util.changeX(),
 				570 * Util.changeY());
-		this.tampa2 = new Tampa(this, tampa2Position, "Tampa2");
+		this.tampa2 = new Tampa(this, tampa2Position, "Tampa2",this.urlImagemTampa2);
+
 		tampaDaVez = tampa1;
 		// Cria a Pista
 		this.pista = new Pista(this);

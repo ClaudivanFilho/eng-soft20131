@@ -2,6 +2,7 @@ package com.me.mygdxgame;
 
 
 import android.os.Bundle;
+import android.text.style.BulletSpan;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
@@ -14,6 +15,10 @@ public class GameActivity extends AndroidApplication {
         AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
         cfg.useGL20 = false;
         
-        initialize(new MyGdxGame(), cfg);
+        Bundle extras = getIntent().getExtras();
+        String tampa1 = extras.getString("tampa1");
+        String tampa2 = extras.getString("tampa2");
+
+        initialize(new MyGdxGame(tampa1,tampa2), cfg);
     }
 }

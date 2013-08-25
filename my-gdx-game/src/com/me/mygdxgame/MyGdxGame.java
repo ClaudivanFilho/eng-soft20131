@@ -1,5 +1,7 @@
 package com.me.mygdxgame;
 
+import java.io.File;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -12,14 +14,26 @@ public class MyGdxGame implements ApplicationListener {
 	private Box2DDebugRenderer debugRenderer;
 
 	public static OrthographicCamera camera;
+	private String imageTampa1; 
+	private String imageTampa2; 
+
 	
+	public MyGdxGame(String imageTampa1,String imageTampa2) {
+		this.imageTampa1 = "data" + File.separator + imageTampa1;
+		this.imageTampa2 = "data" + File.separator + imageTampa2;
+
+	}
+	public MyGdxGame(){
+		this( "tampa1.png","tampa1.png");
+	}
+
 	@Override
 	public void create() {
 		//Camera settings
 		createCamera();
 		
 		//Create World
-		tampinhaWorld = new TampinhaWorld();
+		tampinhaWorld = new TampinhaWorld(imageTampa1,imageTampa2);
 		
 		//Setting input processor
 		Gdx.input.setInputProcessor(new GdxGameInputProcessor(camera, tampinhaWorld));
