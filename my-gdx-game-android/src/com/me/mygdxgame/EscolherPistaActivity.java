@@ -1,14 +1,20 @@
 package com.me.mygdxgame;
 
-
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
+import com.badlogic.gdx.Gdx;
 import com.me.mygdxgame.R;
 
 public class EscolherPistaActivity extends Activity {
@@ -26,8 +32,30 @@ public class EscolherPistaActivity extends Activity {
 		butaoPista1();
 		butaoPista2();
 		butaoPista3();
+		setSizes();
 		butaoVoltar();
 		butaoAvancar();
+	}
+
+	private void setSizes() {
+		Display display = getWindowManager().getDefaultDisplay();
+
+		int width = display.getWidth(); // deprecated
+		int height = display.getHeight();
+		width = (int) (width * 0.70);
+		height = (int) (height * 0.70);
+
+		
+	
+		MarginLayoutParams marginLayoutParams = new MarginLayoutParams( width,  height);
+		marginLayoutParams.rightMargin= 15;
+		butaoPista3.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
+		butaoPista2.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
+		marginLayoutParams.leftMargin= 15;
+
+		
+		butaoPista1.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
+
 	}
 
 	private void butaoVoltar() {
@@ -55,7 +83,6 @@ public class EscolherPistaActivity extends Activity {
 	private void butaoPista3() {
 		butaoPista3 = (Button) findViewById(R.id.butaopista3);
 		butaoPista3.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
 				// Jogar na pista 3
@@ -68,6 +95,7 @@ public class EscolherPistaActivity extends Activity {
 
 	private void butaoPista2() {
 		butaoPista2 = (Button) findViewById(R.id.butaopista2);
+
 		butaoPista2.setOnClickListener(new OnClickListener() {
 
 			@Override

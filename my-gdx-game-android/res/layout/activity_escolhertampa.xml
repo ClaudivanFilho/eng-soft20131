@@ -27,31 +27,11 @@
          android:id="@+id/textoEscolherTampa"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignParentTop="true"
          android:layout_centerHorizontal="true"
-         android:layout_marginTop="40dp"
+         android:layout_above="@+id/butao_tampa1"
+         android:layout_marginBottom="30dp"
          android:text="@string/name_escolhertampa"
          android:textSize="24sp" />
-
-     <Button
-         android:id="@+id/butao_tampa1"
-         android:layout_width="64dp"
-         android:layout_height="64dp"
-         android:layout_below="@+id/textoEscolherTampa"
-         android:layout_marginTop="80dp"
-         android:layout_toRightOf="@+id/butao_voltarTampa"
-         android:background="@drawable/butao_tampa1" />
-     
-     
-     <Button
-         android:id="@+id/butao_tampa2"
-         android:layout_width="64dp"
-         android:layout_height="64dp"
-         android:layout_alignLeft="@+id/butao_tampa1"
-         android:layout_below="@+id/butao_tampa1"
-         android:layout_marginTop="80dp"
-         android:background="@drawable/butao_tampa2"
-        />
 
      
 
@@ -65,15 +45,32 @@
          android:text="Tampa 1"
          android:textSize="20dp" />
 
+     <Button
+         android:id="@+id/butao_tampa2"
+         android:layout_width="64dp"
+         android:layout_height="64dp"
+         android:layout_alignLeft="@+id/butao_tampa1"
+         android:layout_centerVertical="true"
+         android:background="@drawable/butao_tampa2" />
+
      <CheckedTextView
          android:id="@+id/checkedTextView2"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/butao_tampa2"
          android:layout_alignBottom="@+id/butao_tampa2"
-         android:layout_marginBottom="18dp"
-         android:layout_marginLeft="15dp"
+         android:layout_marginLeft="20dp"
          android:layout_toRightOf="@+id/butao_tampa2"
          android:text="Tampa 2"
          android:textSize="20dp" />
+
+     <Button
+         android:id="@+id/butao_tampa1"
+         android:layout_width="64dp"
+         android:layout_height="64dp"
+         android:layout_above="@+id/butao_tampa2"
+         android:layout_marginBottom="30dp"
+         android:layout_toRightOf="@+id/butao_voltarTampa"
+         android:background="@drawable/butao_tampa1" />
 
 </RelativeLayout>

@@ -85,7 +85,7 @@ public class EscolherTampaActivity extends Activity {
 	private void iniciarJogo() {
 		
 		Intent inciarJogo = new Intent(EscolherTampaActivity.this,
-				GameActivity.class);
+				IniciarJogoActivity.class);
 		if(butaoTampa1.isSelected()){
 			inciarJogo.putExtra("tampa1", "tampa1.png");
 			inciarJogo.putExtra("tampa2", "tampa2.png");
