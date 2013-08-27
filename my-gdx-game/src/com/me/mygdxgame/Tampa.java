@@ -91,7 +91,7 @@ public class Tampa {
 		circleBodyDef.angularDamping = 10f;
 		circleBodyDef.linearDamping = 0.6f;
 		circleBody = world.createBody(circleBodyDef);
-		circleBody.setUserData("Tampa");
+		circleBody.setUserData(this.id);
 		CircleShape dynamicCircle = new CircleShape();
 		dynamicCircle.setRadius((width/2)*Util.changeX());
 		FixtureDef fixtureDef = new FixtureDef();

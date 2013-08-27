@@ -45,7 +45,7 @@ public class GdxGameInputProcessor implements InputProcessor {
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		if (!world.flagStopTampa1 && !world.flagStopTampa2) {
 			world.createMouseJoint(world.tampaDaVez.getBody());
-			//inicia a action de Dragged
+			// inicia a action de Dragged
 			world.dragged = new MouseDraggedAction(world, camera);
 			return true;
 		}
@@ -71,13 +71,13 @@ public class GdxGameInputProcessor implements InputProcessor {
 		return false;
 	}
 
-	
-	
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		if (!world.flagStopTampa1 && !world.flagStopTampa2) {
-			// atualiza as cordenadas do dragged
-			world.dragged.atualizacordenadasHead();
+		if (world != null && world.dragged != null) {
+			if (!world.flagStopTampa1 && !world.flagStopTampa2) {
+				// atualiza as cordenadas do dragged
+				world.dragged.atualizacordenadasHead();
+			}
 		}
 		return false;
 	}
@@ -96,7 +96,6 @@ public class GdxGameInputProcessor implements InputProcessor {
 		mouseJointDef.bodyB = currentBody;
 		world.getWorld().createJoint(mouseJointDef);
 	}
-
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
