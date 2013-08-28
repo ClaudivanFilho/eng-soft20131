@@ -8,13 +8,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
-import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 
 public class TampinhaWorld {
 
 	private World world;
 	private Vector2 gravity;
-	private Body currentBody;
 	protected Tampa tampa1;
 	private Tampa tampa2;
 	private Pista pista;
@@ -40,9 +38,6 @@ public class TampinhaWorld {
 			564 * Util.changeY());
 	Vector2 tampa2PositionTemp = new Vector2(150 * Util.changeX(),
 			564 * Util.changeY());
-
-
-	
 	
 	public TampinhaWorld(String urlImagemTampa1,String urlImagemTampa2) {
 		this.urlImagemTampa1  = urlImagemTampa1;
@@ -61,16 +56,12 @@ public class TampinhaWorld {
 		tampaDaVez = tampa1;
 		// Cria a Pista
 		this.pista = new Pista(this);
-	
-		
-		
+
 		turnAnimation = new TurnAnimation(1); // começa com o jogador 1
 		// Adding the contact listener
 		ContactListener listener = new MyContactListener(this);
 		world.setContactListener(listener);
 	}
-	
-	
 
 	public Pista getPista() {
 		return pista;
@@ -87,54 +78,15 @@ public class TampinhaWorld {
 
 	}
 
-	public MouseJoint createMouseJoint(Body tampaBody) {
-		tampa1PositionTemp = new Vector2(tampa1.getBody().getPosition());
-		tampa2PositionTemp = new Vector2(tampa2.getBody().getPosition());
-		if (mouseJoint != null) {
-			world.destroyJoint(mouseJoint);
-		}
-		MouseJointDef mouseJointDef = new MouseJointDef();
-		currentBody = tampaBody;
-		BodyDef mousePointBodyDef = new BodyDef();
-		mousePointBodyDef.position.set(new Vector2(100, 100));
-		Body mousePointBody = world.createBody(mousePointBodyDef);
-		mouseJointDef.target.set(tampaBody.getPosition());
-		mouseJointDef.bodyA = mousePointBody;
-		mouseJointDef.bodyB = currentBody;
-		mouseJointDef.collideConnected = true;
-		mouseJointDef.maxForce = 0;
-		mouseJointDef.frequencyHz = 10f;
-		mouseJoint = (MouseJoint) world.createJoint(mouseJointDef);
-		return mouseJoint;
-	}
-
 	public MouseJoint getMouseJoint() {
 		return mouseJoint;
 	}
 
 	public void render() {
 		world.step(BOX_STEP, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
-		/*
-		 * System.out.println("ATIVO: " + tampa1.getBody().isActive());
-		 * System.out.println("AWAKE: " + tampa1.getBody().isAwake());
-		 * System.out.println("BULLET: " + tampa1.getBody().isBullet());
-		 * System.out.println("SLEPING: " +
-		 * tampa1.getBody().isSleepingAllowed());
-		 * System.out.println("ANGULAR VELOCITY: " +
-		 * tampa1.getBody().getAngularVelocity());
-		 * System.out.println("DAMPINF VELOCITY: " +
-		 * tampa1.getBody().getAngularDamping());
-		 * System.out.println("LINEAR DAMPING: " +
-		 * tampa1.getBody().getLinearDamping()); System.out.println("X: " +
-		 * tampa1.getBody().getLinearVelocity().x + " Y: " +
-		 * tampa1.getBody().getLinearVelocity().x);
-		 */
 		
-		
-		
-		
-		paraTampa1((float) 2.5);
-		paraTampa2((float) 2.5);
+		paraTampa1((float) 3);
+		paraTampa2((float) 3);
 
 		pista.render();
 		desenhaVitoria(tampa1);
@@ -187,7 +139,6 @@ public class TampinhaWorld {
 	 * @param velocidade
 	 */
 	private void paraTampa1(float velocidade) {
-		
 
 		float velocidadeX = Math.abs(tampa1.getBody().getLinearVelocity().x);
 		float velocidadeY = Math.abs(tampa1.getBody().getLinearVelocity().y);
@@ -198,7 +149,8 @@ public class TampinhaWorld {
 		}
 		if (velocidadeX < velocidade && velocidadeY < velocidade
 				&& flagStopTampa1
-				&& Math.abs(tampa2.getBody().getLinearVelocity().x) < 2) {
+				&& Math.abs(tampa2.getBody().getLinearVelocity().x) < velocidade
+				&& Math.abs(tampa2.getBody().getLinearVelocity().y) < velocidade) {
 			tampa1.getBody().setAwake(false);
 			flagStopTampa1 = false;
 			turnAnimation = new TurnAnimation(2);
@@ -221,7 +173,8 @@ public class TampinhaWorld {
 		}
 		if (velocidadeX < velocidade && velocidadeY < velocidade
 				&& flagStopTampa2
-				&& Math.abs(tampa1.getBody().getLinearVelocity().x) < 2) {
+				&& Math.abs(tampa1.getBody().getLinearVelocity().x) < velocidade
+				&& Math.abs(tampa1.getBody().getLinearVelocity().y) < velocidade) {
 			tampa2.getBody().setAwake(false);
 			flagStopTampa2 = false;
 			turnAnimation = new TurnAnimation(1);

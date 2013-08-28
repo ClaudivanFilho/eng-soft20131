@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 
 public class MouseDraggedAction {
 
@@ -46,10 +45,6 @@ public class MouseDraggedAction {
 		originalX = Gdx.input.getX();
 		originalY = Gdx.input.getY();
 		
-		Vector2 currentMousePosition = new Vector2(originalX, 
-				Math.abs(originalY - this.camera.viewportHeight));
-		this.world.getMouseJoint().setTarget(currentMousePosition);
-		
 		atualizacordenadasHead();
 	}
 	
@@ -60,10 +55,6 @@ public class MouseDraggedAction {
 		atualX = Gdx.input.getX();
 		atualY = Gdx.input.getY();
 		
-		Vector2 currentMousePosition = new Vector2(atualX, 
-				Math.abs(atualY - this.camera.viewportHeight));
-		this.world.getMouseJoint().setTarget(currentMousePosition);
-		
 		atualizaImagemHead();
 	}
 	
@@ -72,6 +63,8 @@ public class MouseDraggedAction {
 	 */
 	private void atualizaImagemHead() {
 		Tampa tampa = world.getTampaDaVez();
+		double diferencay = tampa.getBody().getPosition().y - (Gdx.graphics.getHeight()-atualY);
+		double diferencax = atualX - tampa.getBody().getPosition().x;
 		
 		spriteHead = new Sprite(texturaHead);
 		batchHead = new SpriteBatch();
@@ -84,14 +77,11 @@ public class MouseDraggedAction {
 		spriteBody.setOrigin((float)32.0, (float)-10.0);
 		spriteBody.rotate90(true);
 		spriteBody.rotate90(true);  
+		if (Math.abs(diferencay) >30
+				|| Math.abs(diferencax) >30) {
 			spriteBody.setSize(spriteBody.getWidth(), 
-				spriteBody.getHeight() + 
-						(int)Math.sqrt(Math.pow((atualX-originalX),2) + 
-						Math.pow((atualY-originalY),2)));
-	
-		
-		double diferencay = atualY - Math.abs(tampa.getBody().getPosition().y - camera.viewportHeight) ;
-		double diferencax = atualX - tampa.getBody().getPosition().x ;
+				spriteBody.getHeight() + getDistancia() -25);
+		}
 		
 		//rotaciona a imagem em 180 graus
 		if (diferencay < 0) {
@@ -114,7 +104,6 @@ public class MouseDraggedAction {
 			spriteHead.rotate((int)(angulo*60));
 			spriteBody.rotate((int)(angulo*60));
 		}
-		
 	}
 	
 	/**
@@ -127,22 +116,24 @@ public class MouseDraggedAction {
 		batchBody.begin();
 		spriteBody.setPosition(tampa.getBody().getPosition().x-32
 				, (tampa.getBody().getPosition().y+10));
-			
 		spriteBody.draw(batchBody);
 		spriteBody.draw(batchBody, 100);
-		
 		batchBody.end();
 		
 		batchHead.begin();
-		
-		
 		// desenha a imagem da cabeca da seta na tampa
 		spriteHead.setPosition(tampa.getBody().getPosition().x-32
 					, (tampa.getBody().getPosition().y));
-		
 		spriteHead.draw(batchHead);
 		spriteHead.draw(batchHead, 100);
-		
 		batchHead.end();
+	}
+	
+	public int getDistancia() {
+		Tampa tampa = world.getTampaDaVez();
+		double diferencay = tampa.getBody().getPosition().y - (Gdx.graphics.getHeight()-atualY);
+		double diferencax = atualX - tampa.getBody().getPosition().x;
+		return (int)Math.sqrt(Math.pow((diferencax),2) + 
+				Math.pow((diferencay),2));
 	}
 }

@@ -1,7 +1,5 @@
 package com.me.mygdxgame;
 
-import java.io.File;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
