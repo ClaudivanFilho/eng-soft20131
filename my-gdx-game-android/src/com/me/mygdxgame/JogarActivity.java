@@ -15,18 +15,46 @@ public class JogarActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_jogar);
 		
-		Button butaoArcade= (Button) findViewById(R.id.butao_arcade);
-		butaoArcade.setOnClickListener(new OnClickListener() {
+		butaoArcade();
+		butaoTime();
+		butaoCampeonato();
+		butaoTreinamento();
+		butaoMenu();
+	}
+	
+	private void butaoTime() {
+		Button butaoMenu = (Button) findViewById(R.id.butao_timetrial);
+		butaoMenu.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				if (intentEscolher == null) {
-					intentEscolher = new Intent(JogarActivity.this, EscolherPistaActivity.class);
-				}
-				startActivity(intentEscolher);
+				//time trial
 			}
 		});
-		
+	}
+	
+	private void butaoTreinamento() {
+		Button butaoMenu = (Button) findViewById(R.id.butao_treinamento);
+		butaoMenu.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				//time trial
+			}
+		});
+	}
+	
+	private void butaoMenu() {
+		Button butaoMenu = (Button) findViewById(R.id.butao_menu2);
+		butaoMenu.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				finish();
+			}
+		});
+	}
+	private void butaoCampeonato() {
 		Button butaoCampeonato= (Button) findViewById(R.id.butao_campeonato);
 		butaoCampeonato.setOnClickListener(new OnClickListener() {
 
@@ -41,14 +69,17 @@ public class JogarActivity extends Activity {
 				startActivity(intentTampa);
 			}
 		});
-		
-		
-		Button butaoMenu = (Button) findViewById(R.id.butao_menu2);
-		butaoMenu.setOnClickListener(new OnClickListener() {
+	}
+	private void butaoArcade() {
+		Button butaoArcade= (Button) findViewById(R.id.butao_arcade);
+		butaoArcade.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
-				finish();
+				if (intentEscolher == null) {
+					intentEscolher = new Intent(JogarActivity.this, EscolherPistaActivity.class);
+				}
+				startActivity(intentEscolher);
 			}
 		});
 	}
