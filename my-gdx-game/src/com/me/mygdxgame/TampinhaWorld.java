@@ -236,7 +236,8 @@ public class TampinhaWorld {
 		}
 		if (velocidadeX < velocidade && velocidadeY < velocidade
 				&& flagStopTampa1
-				&& Math.abs(tampa2.getBody().getLinearVelocity().x) < 2) {
+				&& Math.abs(tampa2.getBody().getLinearVelocity().x) < velocidade
+				&& Math.abs(tampa2.getBody().getLinearVelocity().y) < velocidade) {
 			tampa1.getBody().setAwake(false);
 			flagStopTampa1 = false;
 			turnAnimation = new TurnAnimation(2);
@@ -259,12 +260,14 @@ public class TampinhaWorld {
 		}
 		if (velocidadeX < velocidade && velocidadeY < velocidade
 				&& flagStopTampa2
-				&& Math.abs(tampa1.getBody().getLinearVelocity().x) < 2) {
+				&& Math.abs(tampa1.getBody().getLinearVelocity().x) < velocidade
+				&& Math.abs(tampa1.getBody().getLinearVelocity().y) < velocidade) {
 			tampa2.getBody().setAwake(false);
 			flagStopTampa2 = false;
 			turnAnimation = new TurnAnimation(1);
 		}
 	}
+
 
 	public Tampa getTampa1() {
 		return this.tampa1;

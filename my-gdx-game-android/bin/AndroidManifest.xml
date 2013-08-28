@@ -8,11 +8,10 @@
         android:minSdkVersion="5"
         android:targetSdkVersion="17" />
 
-    <application 
-        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+    <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        >
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <activity
             android:name="com.me.mygdxgame.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
@@ -20,28 +19,38 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"  />
+                                    <category android:name="android.intent.category.HOME" />
+                   
             </intent-filter>
         </activity>
         <activity
             android:name="com.me.mygdxgame.OpcoesActivity"
-            android:label="@string/name_opcoes" 
-           >
+            android:label="@string/name_opcoes" >
+            <category android:name="android.intent.category.DEFAULT" />
         </activity>
         <activity android:name="com.me.mygdxgame.IniciarJogoActivity" >
+            <category android:name="android.intent.category.DEFAULT" />
         </activity>
         <activity
-            
             android:name="com.me.mygdxgame.EscolherPistaActivity"
             android:label="@string/name_escolher" >
+            <category android:name="android.intent.category.DEFAULT" />
         </activity>
         <activity
             android:name="com.me.mygdxgame.EscolherTampaActivity"
             android:label="@string/name_escolhertampa" >
+            <category android:name="android.intent.category.DEFAULT" />
         </activity>
         <activity
             android:name="com.me.mygdxgame.JogarActivity"
             android:label="@string/name_jogar" >
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity
+            android:name="com.me.mygdxgame.PausaActivity"
+            android:label="@string/name_jogar" >
+            <category android:name="android.intent.category.DEFAULT" />
         </activity>
     </application>
 

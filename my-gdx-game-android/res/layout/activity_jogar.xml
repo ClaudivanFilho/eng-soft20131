@@ -8,25 +8,45 @@
     <Button
         android:id="@+id/butao_arcade"
         style="@style/main_menu_btnTop"
-        android:layout_centerVertical="true"
+         android:layout_above="@+id/butao_timetrial"
+        android:layout_alignBottom="@+id/butao_timetrial"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/butao"
         android:text="@string/name_arcade" />
 
+    
+    
+    <Button
+        android:id="@+id/butao_treinamento"
+        style="@style/main_menu_btnTop"
+        android:layout_alignTop="@+id/butao_timetrial"
+        android:layout_below="@+id/butao_timetrial"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/butao"
+        android:text="@string/name_treinar" />
+    
     <Button
         android:id="@+id/butao_menu2"
-       style="@style/main_menu_btnTop"
-        android:layout_alignTop="@+id/butao_arcade"
-        android:layout_below="@+id/butao_arcade"
-        android:layout_marginTop="92dp"
+        style="@style/main_menu_btnTop"
+        android:layout_alignTop="@+id/butao_treinamento"
+        android:layout_below="@+id/butao_treinamento"
+        android:layout_marginTop="60dp"
         android:background="@drawable/butao"
         android:text="@string/name_menu" />
 
     <Button
+        android:id="@+id/butao_timetrial"
+        style="@style/main_menu_btnTop"
+        android:layout_centerVertical="true"
+        android:background="@drawable/butao"
+        android:text="@string/name_time" />
+
+    <Button
         android:id="@+id/butao_campeonato"
-       style="@style/main_menu_btnTop"
+        style="@style/main_menu_btnTop"
         android:layout_above="@+id/butao_arcade"
         android:layout_alignBottom="@+id/butao_arcade"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/butao"
         android:text="@string/name_campeonato" />
 

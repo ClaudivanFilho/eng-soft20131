@@ -11,6 +11,6 @@ public class Main {
 		cfg.height = 960/2;
 		cfg.width = 720/2;
 		
-		new LwjglApplication(new MyGdxGame("tampa1.png","tampa2.png"), cfg);
+		new LwjglApplication(new MyGdxGame(), cfg);
 	}
 }

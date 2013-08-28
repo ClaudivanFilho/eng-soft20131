@@ -23,5 +23,8 @@
     <string name="name_tampa2">Tampa 2</string>
     <string name="name_voltarmenu">Voltar ao menu</string>
     <string name="name_voltarjogo">Voltar ao jogo</string>
+     <string name="name_treinar">Treinamento</string>
+          <string name="name_time">Time-Trial</string>
+     
     
 </resources>

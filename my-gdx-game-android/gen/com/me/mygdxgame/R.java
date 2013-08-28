@@ -39,38 +39,41 @@ public final class R {
         public static final int new_button=0x7f020007;
         public static final int pista_menu=0x7f020008;
         public static final int pista_menu_selected=0x7f020009;
-        public static final int pista_menu_selected2=0x7f02000a;
-        public static final int tampa1=0x7f02000b;
-        public static final int tampa1selec=0x7f02000c;
-        public static final int tampa2=0x7f02000d;
-        public static final int tampa2selec=0x7f02000e;
-        public static final int undo=0x7f02000f;
+        public static final int tampa1_icon=0x7f02000a;
+        public static final int tampa1_sel=0x7f02000b;
+        public static final int tampa2_icon=0x7f02000c;
+        public static final int tampa2_sel=0x7f02000d;
+        public static final int undo=0x7f02000e;
     }
     public static final class id {
         public static final int butao_arcade=0x7f07000d;
         public static final int butao_avancar=0x7f070001;
-        public static final int butao_campeonato=0x7f07000f;
+        public static final int butao_campeonato=0x7f070011;
         public static final int butao_iniciarPartida=0x7f070008;
-        public static final int butao_jogar=0x7f070011;
-        public static final int butao_menu=0x7f070017;
-        public static final int butao_menu2=0x7f07000e;
-        public static final int butao_opcoes=0x7f070010;
-        public static final int butao_sair=0x7f070012;
+        public static final int butao_jogar=0x7f070013;
+        public static final int butao_menu=0x7f070019;
+        public static final int butao_menu2=0x7f070010;
+        public static final int butao_opcoes=0x7f070012;
+        public static final int butao_sair=0x7f070014;
         public static final int butao_tampa1=0x7f07000a;
         public static final int butao_tampa2=0x7f07000c;
+        public static final int butao_timetrial=0x7f07000e;
+        public static final int butao_treinamento=0x7f07000f;
         public static final int butao_voltar=0x7f070000;
         public static final int butao_voltarTampa=0x7f070007;
+        public static final int butao_voltarjogo=0x7f07001c;
+        public static final int butao_voltarmenu=0x7f07001b;
         public static final int butaopista1=0x7f070004;
         public static final int butaopista2=0x7f070005;
         public static final int butaopista3=0x7f070006;
         public static final int checkedTextView1=0x7f070003;
         public static final int checkedTextView2=0x7f07000b;
         public static final int horizontalScrollView1=0x7f070002;
-        public static final int seekBarMusica=0x7f070013;
-        public static final int seekBarSom=0x7f070014;
-        public static final int textView1=0x7f070018;
-        public static final int textView2=0x7f070015;
-        public static final int textView3=0x7f070016;
+        public static final int seekBarMusica=0x7f070015;
+        public static final int seekBarSom=0x7f070016;
+        public static final int textView1=0x7f07001a;
+        public static final int textView2=0x7f070017;
+        public static final int textView3=0x7f070018;
         public static final int textoEscolherTampa=0x7f070009;
     }
     public static final class layout {
@@ -79,7 +82,8 @@ public final class R {
         public static final int activity_jogar=0x7f030002;
         public static final int activity_main=0x7f030003;
         public static final int activity_opcoes=0x7f030004;
-        public static final int main=0x7f030005;
+        public static final int activity_pausa=0x7f030005;
+        public static final int main=0x7f030006;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -102,7 +106,11 @@ public final class R {
         public static final int name_som=0x7f050006;
         public static final int name_tampa1=0x7f050013;
         public static final int name_tampa2=0x7f050014;
+        public static final int name_time=0x7f050018;
+        public static final int name_treinar=0x7f050017;
         public static final int name_voltar=0x7f05000c;
+        public static final int name_voltarjogo=0x7f050016;
+        public static final int name_voltarmenu=0x7f050015;
     }
     public static final class style {
         public static final int main_menu=0x7f060000;
