@@ -1,6 +1,5 @@
 package com.me.mygdxgame;
 
-import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +12,7 @@ import android.widget.ImageButton;
 public class EscolherTampaActivity extends Activity {
 	private Button butaoTampa1;
 	private Button butaoTampa2;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,9 +47,8 @@ public class EscolherTampaActivity extends Activity {
 		});
 	}
 
-	
 	private void butaoTampa2() {
-		 butaoTampa2 = (Button) findViewById(R.id.butao_tampa2);
+		butaoTampa2 = (Button) findViewById(R.id.butao_tampa2);
 		butaoTampa2.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -60,8 +59,7 @@ public class EscolherTampaActivity extends Activity {
 	}
 
 	private void butaoTampa1() {
-		 butaoTampa1 = (Button) findViewById(R.id.butao_tampa1);
-		 //butaoTampa1.setBack(getResources().getAssets().open('tampa1.png'));
+		butaoTampa1 = (Button) findViewById(R.id.butao_tampa1);
 		butaoTampa1.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -69,10 +67,9 @@ public class EscolherTampaActivity extends Activity {
 				atualizaSelecao(butaoTampa1);
 			}
 
-			
 		});
 	}
-	
+
 	public void setTodosButaoFalse() {
 		butaoTampa1.setSelected(false);
 		butaoTampa2.setSelected(false);
@@ -82,19 +79,23 @@ public class EscolherTampaActivity extends Activity {
 		setTodosButaoFalse();
 		butao.setSelected(true);
 	}
-	
-	private void iniciarJogo() {
-		
-		Intent inciarJogo = new Intent(EscolherTampaActivity.this,
-				IniciarJogoActivity.class);
-		if(butaoTampa1.isSelected()){
-			inciarJogo.putExtra("tampa1", "tampa1.png");
-			inciarJogo.putExtra("tampa2", "tampa2.png");
 
-		}else{
-			inciarJogo.putExtra("tampa1", "tampa2.png");
-			inciarJogo.putExtra("tampa2", "tampa1.png");
+	private void iniciarJogo() {
+		 Bundle extras = getIntent().getExtras();
+	     String pista = extras.getString("pista");
+		Intent iniciarJogo = new Intent(EscolherTampaActivity.this,
+		IniciarJogoActivity.class);
+		iniciarJogo.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		if(pista != null){iniciarJogo.putExtra("pista",pista);}
+		if (butaoTampa1.isSelected()) {
+			iniciarJogo.putExtra("tampa1", "tampa1.png");
+			iniciarJogo.putExtra("tampa2", "tampa2.png");
+
+		} else {
+			iniciarJogo.putExtra("tampa1", "tampa2.png");
+			iniciarJogo.putExtra("tampa2", "tampa1.png");
 		}
-		startActivity(inciarJogo);
+		startActivity(iniciarJogo);
 	}
+
 }

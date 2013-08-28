@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/butao_voltarmenu"
+        style="@style/main_menu_btnTop"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/butao"
+        android:text="@string/name_voltarmenu" />
+
+    <Button
+        android:id="@+id/butao_voltarjogo"
+        style="@style/main_menu_btnTop"
+       android:layout_above="@+id/butao_voltarmenu"
+        android:layout_alignBottom="@+id/butao_voltarmenu"
+        android:layout_marginBottom="92dp"
+        android:background="@drawable/butao"
+        android:text="@string/name_voltarjogo" />
+
+</RelativeLayout>

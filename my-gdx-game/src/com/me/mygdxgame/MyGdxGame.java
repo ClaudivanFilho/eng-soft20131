@@ -16,15 +16,20 @@ public class MyGdxGame implements ApplicationListener {
 	public static OrthographicCamera camera;
 	private String imageTampa1; 
 	private String imageTampa2; 
+	private String pista; 
 
 	
-	public MyGdxGame(String imageTampa1,String imageTampa2) {
+	public MyGdxGame(String imageTampa1,String imageTampa2, String pista) {
 		this.imageTampa1 = "data" + File.separator + imageTampa1;
 		this.imageTampa2 = "data" + File.separator + imageTampa2;
-
+		this.pista = pista;
 	}
 	public MyGdxGame(){
-		this( "tampa1.png","tampa1.png");
+		this( "tampa1.png","tampa1.png","pista1");
+	}
+	
+	public MyGdxGame(String imageTampa1,String imageTampa2){
+		this( imageTampa1,imageTampa2,"pista1");
 	}
 
 	@Override
@@ -33,7 +38,7 @@ public class MyGdxGame implements ApplicationListener {
 		createCamera();
 		
 		//Create World
-		tampinhaWorld = new TampinhaWorld(imageTampa1,imageTampa2);
+		tampinhaWorld = new TampinhaWorld(imageTampa1,imageTampa2,pista);
 		
 		//Setting input processor
 		Gdx.input.setInputProcessor(new GdxGameInputProcessor(camera, tampinhaWorld));
@@ -41,7 +46,8 @@ public class MyGdxGame implements ApplicationListener {
 		//Setting Rederer
 		debugRenderer = new Box2DDebugRenderer();
 	}
-
+	
+	
 	private void createCamera() {
 		
 		

@@ -3,16 +3,18 @@ package com.me.mygdxgame;
 import com.badlogic.gdx.Gdx;
 
 public class Util {
-	private static float w = Gdx.graphics.getWidth();
-	private static float h = Gdx.graphics.getHeight();
-	private final static float wDefault = 1024f;
-	private final static float hDefault = 1024f;
-	private static float p = hDefault / wDefault;
-	private static float p2 = wDefault / hDefault;
+	public static float w = Gdx.graphics.getWidth();
+	public static float h = Gdx.graphics.getHeight();
+	public final static float wDefault = 1024f;
+	public final static float hDefault = 1024f;
+	public static float p = hDefault / wDefault;
+	public static float p2 = wDefault / hDefault;
 
 	
 
-	
+	public static int center(float textWidth){
+		return   (int) ((w / 2) - (textWidth / 2));
+	}
 	
 	public static float changeX() {
 		if(p < h/w){

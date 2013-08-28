@@ -1,4 +1,7 @@
 package com.me.mygdxgame;
+
+import java.io.File;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,15 +11,18 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
+import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 
 public class TampinhaWorld {
 
 	private World world;
 	private Vector2 gravity;
+	private Body currentBody;
 	protected Tampa tampa1;
 	private Tampa tampa2;
 	private Pista pista;
-
+	private SpriteBatch spriteBatch;
+	private BitmapFont font;
 	static final float BOX_STEP = 1 / 60f;
 	static final int BOX_VELOCITY_ITERATIONS = 6;
 	static final int BOX_POSITION_ITERATIONS = 2;
@@ -38,9 +44,12 @@ public class TampinhaWorld {
 			564 * Util.changeY());
 	Vector2 tampa2PositionTemp = new Vector2(150 * Util.changeX(),
 			564 * Util.changeY());
-	
-	public TampinhaWorld(String urlImagemTampa1,String urlImagemTampa2) {
-		this.urlImagemTampa1  = urlImagemTampa1;
+
+	public TampinhaWorld(String urlImagemTampa1, String urlImagemTampa2,
+			String pista) {
+		this.spriteBatch = new SpriteBatch();
+		this.font = new BitmapFont();
+		this.urlImagemTampa1 = urlImagemTampa1;
 		this.urlImagemTampa2 = urlImagemTampa2;
 		// Cria o Mundo
 		this.gravity = new Vector2();
@@ -48,19 +57,66 @@ public class TampinhaWorld {
 		// Cria as duas tampas
 		Vector2 tampa1Position = new Vector2(80 * Util.changeX(),
 				564 * Util.changeY());
-		this.tampa1 = new Tampa(this, tampa1Position, "Tampa1",this.urlImagemTampa1);
+		this.tampa1 = new Tampa(this, tampa1Position, "Tampa1",
+				this.urlImagemTampa1);
 		Vector2 tampa2Position = new Vector2(170 * Util.changeX(),
 				570 * Util.changeY());
-		this.tampa2 = new Tampa(this, tampa2Position, "Tampa2",this.urlImagemTampa2);
+		this.tampa2 = new Tampa(this, tampa2Position, "Tampa2",
+				this.urlImagemTampa2);
 
 		tampaDaVez = tampa1;
 		// Cria a Pista
-		this.pista = new Pista(this);
+
+		criarPista(pista);
 
 		turnAnimation = new TurnAnimation(1); // começa com o jogador 1
 		// Adding the contact listener
 		ContactListener listener = new MyContactListener(this);
 		world.setContactListener(listener);
+	}
+
+	private void criarPista(String pista) {
+
+		CheckPoint checkPoint1;
+		CheckPoint checkPoint2;
+		CheckPoint checkPoint3;
+		CheckPoint checkPoint4;
+		if (pista.equals("pista1")) {
+			checkPoint1 = new CheckPoint(this, 140f * Util.changeX(),
+					600f * Util.changeY(), 0.1f, 40f, "checkPoint1");
+			checkPoint2 = new CheckPoint(this, 780f * Util.changeX(),
+					840f * Util.changeY(), 0.5f, 40f, "checkPoint2");
+			checkPoint3 = new CheckPoint(this, 150f * Util.changeX(),
+					140f * Util.changeY(), 0.6f, 40f, "checkPoint3");
+			checkPoint4 = new CheckPoint(this, 808f * Util.changeX(),
+					140f * Util.changeY(), -0.5f, 40f, "checkPoint4");
+			this.pista = new Pista(this,"teste-body-editor1.json", "pista1.png" , checkPoint1, checkPoint2, checkPoint3,checkPoint4);
+		}
+		if (pista.equals("pista2")) {
+			checkPoint1 = new CheckPoint(this, 140f * Util.changeX(),
+					600f * Util.changeY(), 0.1f, 40f, "checkPoint1");
+			checkPoint2 = new CheckPoint(this, 780f * Util.changeX(),
+					840f * Util.changeY(), 0.5f, 40f, "checkPoint2");
+			checkPoint3 = new CheckPoint(this, 150f * Util.changeX(),
+					140f * Util.changeY(), 0.6f, 40f, "checkPoint3");
+			checkPoint4 = new CheckPoint(this, 808f * Util.changeX(),
+					140f * Util.changeY(), -0.5f, 40f, "checkPoint4");
+			this.pista = new Pista(this, "teste-body-editor2.json", "pista2.png", checkPoint1, checkPoint2, checkPoint3,
+					checkPoint4);
+		}
+		if (pista.equals("pista3")) {
+			checkPoint1 = new CheckPoint(this, 140f * Util.changeX(),
+					600f * Util.changeY(), 0.1f, 40f, "checkPoint1");
+			checkPoint2 = new CheckPoint(this, 780f * Util.changeX(),
+					840f * Util.changeY(), 0.5f, 40f, "checkPoint2");
+			checkPoint3 = new CheckPoint(this, 150f * Util.changeX(),
+					140f * Util.changeY(), 0.6f, 40f, "checkPoint3");
+			checkPoint4 = new CheckPoint(this, 808f * Util.changeX(),
+					140f * Util.changeY(), -0.5f, 40f, "checkPoint4");
+			this.pista = new Pista(this, "teste-body-editor3.json", "pista3.png", checkPoint1, checkPoint2, checkPoint3,
+					checkPoint4);
+		}
+
 	}
 
 	public Pista getPista() {
@@ -76,57 +132,92 @@ public class TampinhaWorld {
 
 	}
 
+	public MouseJoint createMouseJoint(Body tampaBody) {
+		tampa1PositionTemp = new Vector2(tampa1.getBody().getPosition());
+		tampa2PositionTemp = new Vector2(tampa2.getBody().getPosition());
+		if (mouseJoint != null) {
+			world.destroyJoint(mouseJoint);
+		}
+		MouseJointDef mouseJointDef = new MouseJointDef();
+		currentBody = tampaBody;
+		BodyDef mousePointBodyDef = new BodyDef();
+		mousePointBodyDef.position.set(new Vector2(100, 100));
+		Body mousePointBody = world.createBody(mousePointBodyDef);
+		mouseJointDef.target.set(tampaBody.getPosition());
+		mouseJointDef.bodyA = mousePointBody;
+		mouseJointDef.bodyB = currentBody;
+		mouseJointDef.collideConnected = true;
+		mouseJointDef.maxForce = 0;
+		mouseJointDef.frequencyHz = 10f;
+		mouseJoint = (MouseJoint) world.createJoint(mouseJointDef);
+		return mouseJoint;
+	}
+
 	public MouseJoint getMouseJoint() {
 		return mouseJoint;
 	}
 
+	private boolean isVitoria = false;
+
 	public void render() {
 		world.step(BOX_STEP, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
-		
-		paraTampa1((float) 3);
-		paraTampa2((float) 3);
+		/*
+		 * System.out.println("ATIVO: " + tampa1.getBody().isActive());
+		 * System.out.println("AWAKE: " + tampa1.getBody().isAwake());
+		 * System.out.println("BULLET: " + tampa1.getBody().isBullet());
+		 * System.out.println("SLEPING: " +
+		 * tampa1.getBody().isSleepingAllowed());
+		 * System.out.println("ANGULAR VELOCITY: " +
+		 * tampa1.getBody().getAngularVelocity());
+		 * System.out.println("DAMPINF VELOCITY: " +
+		 * tampa1.getBody().getAngularDamping());
+		 * System.out.println("LINEAR DAMPING: " +
+		 * tampa1.getBody().getLinearDamping()); System.out.println("X: " +
+		 * tampa1.getBody().getLinearVelocity().x + " Y: " +
+		 * tampa1.getBody().getLinearVelocity().x);
+		 */
+
+		paraTampa1((float) 2.5);
+		paraTampa2((float) 2.5);
 
 		pista.render();
-		desenhaVitoria(tampa1);
-		desenhaVitoria(tampa2);;
+		isVitoria = isVitoria(tampa1);
+		isVitoria = isVitoria || isVitoria(tampa2);
 
 		tampa1.render();
 		tampa2.render();
 		if (!flagStopTampa1 && !flagStopTampa2) {
 			resetarTampas();
 		}
-		turnAnimation.render();
+		if (!isVitoria) {
+			turnAnimation.render();
+		}
 
 		if (dragged != null) {
 			dragged.render();
 		}
 	}
 
-	private void desenhaVitoria(Tampa tampa) {
-		if(tampa.isRaceComplete()){
-			 SpriteBatch spriteBatch;
-		        BitmapFont font;
-		        CharSequence str = tampa.getId()+" Venceu!!!";
-		        spriteBatch = new SpriteBatch();
-		       
-		       
-		        font = new BitmapFont();
-		        float textWidth = font.getBounds(str).width; 
-		        
-		    	  float w = Gdx.graphics.getWidth();
-		    	  float h = Gdx.graphics.getHeight();
-		        
-		    	  int center = (int) ((w/2) - (textWidth/2));
-		    	  
-		        spriteBatch.begin();
-		        font.draw(spriteBatch, str, center, h/2);
-		        spriteBatch.end();
-		        
-		        if(!flagStopTampa1 && !flagStopTampa2 ){
-		    		Gdx.app.exit();
+	private boolean isVitoria(Tampa tampa) {
+		if (tampa.isRaceComplete()) {
 
-		        }
+			CharSequence str = tampa.getId() + " Venceu!!!";
+
+			float textWidth = font.getBounds(str).width;
+
+			int center = Util.center(textWidth);
+
+			spriteBatch.begin();
+			font.draw(spriteBatch, str, center, Util.h / 2);
+			spriteBatch.end();
+
+			if (!flagStopTampa1 && !flagStopTampa2) {
+				Gdx.app.exit();
+
+			}
+			return true;
 		}
+		return false;
 	}
 
 	/**
@@ -145,8 +236,7 @@ public class TampinhaWorld {
 		}
 		if (velocidadeX < velocidade && velocidadeY < velocidade
 				&& flagStopTampa1
-				&& Math.abs(tampa2.getBody().getLinearVelocity().x) < velocidade
-				&& Math.abs(tampa2.getBody().getLinearVelocity().y) < velocidade) {
+				&& Math.abs(tampa2.getBody().getLinearVelocity().x) < 2) {
 			tampa1.getBody().setAwake(false);
 			flagStopTampa1 = false;
 			turnAnimation = new TurnAnimation(2);
@@ -169,8 +259,7 @@ public class TampinhaWorld {
 		}
 		if (velocidadeX < velocidade && velocidadeY < velocidade
 				&& flagStopTampa2
-				&& Math.abs(tampa1.getBody().getLinearVelocity().x) < velocidade
-				&& Math.abs(tampa1.getBody().getLinearVelocity().y) < velocidade) {
+				&& Math.abs(tampa1.getBody().getLinearVelocity().x) < 2) {
 			tampa2.getBody().setAwake(false);
 			flagStopTampa2 = false;
 			turnAnimation = new TurnAnimation(1);

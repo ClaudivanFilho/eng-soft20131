@@ -32,8 +32,11 @@ public class JogarActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
+
 				if (intentTampa == null) {
 					intentTampa = new Intent(JogarActivity.this, EscolherTampaActivity.class);
+					intentTampa.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
 				}
 				startActivity(intentTampa);
 			}

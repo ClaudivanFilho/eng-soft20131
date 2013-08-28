@@ -18,7 +18,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class Pista {
 	private TampinhaWorld world;
 	private Texture texture;
-	private String imageURL = "data" + File.separator + "pista.png";
 	private Sprite sprite;
 	private Body speedwayBody;
 	private SpriteBatch spriteBatch;
@@ -28,29 +27,31 @@ public class Pista {
 	private CheckPoint checkPoint2;
 	private CheckPoint checkPoint3;
 	private CheckPoint checkPoint4;
+	private String imageURL;
+	private String bodyPath;
+			
 
-	public Pista(TampinhaWorld world) {
+	public Pista(TampinhaWorld world,  String bodyName,String imageName,
+			CheckPoint checkPoint1, CheckPoint checkPoint2,
+			CheckPoint checkPoint3, CheckPoint checkPoint4) {
+		this.bodyPath = "data" + File.separator + bodyName;
+		this.imageURL = "data" + File.separator + imageName;
 		this.world = world;
+		this.checkPoint1 = checkPoint1;
+		this.checkPoint2 = checkPoint1;
+		this.checkPoint3 = checkPoint1;
+		this.checkPoint4 = checkPoint1;
+
 		criarPista();
 		criarImagemDaPista();
 
 	}
-	
-	
-	public void initCheckPoints(){
-		// check point
-				 checkPoint1 = new CheckPoint(this.world,140f* Util.changeX(), 600f* Util.changeY(), 0.1f, 40f,"checkPoint1");
-				 checkPoint2 = new CheckPoint(this.world,780f* Util.changeX(), 840f* Util.changeY(), 0.5f, 40f,"checkPoint2");
-				 checkPoint3 = new CheckPoint(this.world,150f* Util.changeX(), 140f* Util.changeY(), 0.6f, 40f,"checkPoint3");
-				 checkPoint4 = new CheckPoint(this.world,808f* Util.changeX(), 140f* Util.changeY(), -0.5f, 40f,"checkPoint4");
-	}
-	
-	
+
 	private void criarPista() {
 		// 0. Create a loader for the file saved from the editor.
+
 		BodyEditorLoader loader = new BodyEditorLoader(
-				Gdx.files.internal("data" + File.separator
-						+ "teste-body-editor.json"));
+				Gdx.files.internal(bodyPath));
 
 		// 1. Create a BodyDef, as usual.
 		BodyDef bd = new BodyDef();
@@ -69,54 +70,45 @@ public class Pista {
 		fd.isSensor = true;
 		speedwayBody = world.createBody(bd);
 		speedwayBody.setUserData("Pista");
-		float SPEEDWAY_WIDTH = 1024*Util.changeX() ;
-		
+		float SPEEDWAY_WIDTH = 1024 * Util.changeX();
+
 		// 4. Create the body fixture automatically by using the loader.
 		loader.attachFixture(speedwayBody, "pista1", fd, SPEEDWAY_WIDTH);
 		speedWayBodyOrigin = loader.getOrigin("pista1", SPEEDWAY_WIDTH).cpy();
-		speedWayBodyOrigin.mul(0.1f,0.1f);
-		initCheckPoints();
+		speedWayBodyOrigin.mul(0.1f, 0.1f);
 	}
 
 	public CheckPoint getCheckPoint1() {
 		return checkPoint1;
 	}
 
-
 	public void setCheckPoint1(CheckPoint checkPoint1) {
 		this.checkPoint1 = checkPoint1;
 	}
-
 
 	public CheckPoint getCheckPoint2() {
 		return checkPoint2;
 	}
 
-
 	public void setCheckPoint2(CheckPoint checkPoint2) {
 		this.checkPoint2 = checkPoint2;
 	}
-
 
 	public CheckPoint getCheckPoint3() {
 		return checkPoint3;
 	}
 
-
 	public void setCheckPoint3(CheckPoint checkPoint3) {
 		this.checkPoint3 = checkPoint3;
 	}
-
 
 	public CheckPoint getCheckPoint4() {
 		return checkPoint4;
 	}
 
-
 	public void setCheckPoint4(CheckPoint checkPoint4) {
 		this.checkPoint4 = checkPoint4;
 	}
-
 
 	private void criarImagemDaPista() {
 		texture = new Texture(imageURL);
@@ -146,12 +138,13 @@ public class Pista {
 
 		// this is only one possible drawing out of many
 		TextureRegion region = new TextureRegion(texture, 0, 0, 720, 960);
-		//spriteBatch.draw(region, 0,0,1024*Util.changeX(),1024*Util.changeY());
-		sprite.setRegion(region);
+		spriteBatch.draw(region, 0, 0, 1024 * Util.changeX(),
+				1024 * Util.changeY());
+
 		// this is another one
 
 		// and a third...
-		sprite.draw(spriteBatch);
+		// sprite.draw(spriteBatch, 100);
 		// sprite.draw(spriteBatch);
 
 		spriteBatch.end();

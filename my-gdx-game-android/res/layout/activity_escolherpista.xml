@@ -48,7 +48,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="0dp"
-                android:background="@drawable/pista" />
+                android:background="@drawable/new_button" />
 
             <Button
                 android:id="@+id/butaopista2"

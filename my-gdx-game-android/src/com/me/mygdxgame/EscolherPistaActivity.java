@@ -45,16 +45,17 @@ public class EscolherPistaActivity extends Activity {
 		width = (int) (width * 0.70);
 		height = (int) (height * 0.70);
 
-		
-	
-		MarginLayoutParams marginLayoutParams = new MarginLayoutParams( width,  height);
-		marginLayoutParams.rightMargin= 15;
-		butaoPista3.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
-		butaoPista2.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
-		marginLayoutParams.leftMargin= 15;
+		MarginLayoutParams marginLayoutParams = new MarginLayoutParams(width,
+				height);
+		marginLayoutParams.rightMargin = 15;
+		butaoPista3.setLayoutParams(new LinearLayout.LayoutParams(
+				marginLayoutParams));
+		butaoPista2.setLayoutParams(new LinearLayout.LayoutParams(
+				marginLayoutParams));
+		marginLayoutParams.leftMargin = 15;
 
-		
-		butaoPista1.setLayoutParams(new LinearLayout.LayoutParams(marginLayoutParams));
+		butaoPista1.setLayoutParams(new LinearLayout.LayoutParams(
+				marginLayoutParams));
 
 	}
 
@@ -118,24 +119,21 @@ public class EscolherPistaActivity extends Activity {
 	}
 
 	public void avancarParaJogo() {
+		intentPista = new Intent(EscolherPistaActivity.this,
+				EscolherTampaActivity.class);
 		if (butaoPista1.isSelected()) {
-			System.out.println("Pista 1");
+			intentPista.putExtra("pista", "pista1");
 		} else if (butaoPista2.isSelected()) {
-			System.out.println("Pista 2");
+			intentPista.putExtra("pista", "pista2");
 		} else if (butaoPista3.isSelected()) {
-			System.out.println("Pista 3");
-		}
-		iniciarActiveTampa();
-
-	}
-
-	private void iniciarActiveTampa() {
-		if (intentPista == null) {
-			intentPista = new Intent(EscolherPistaActivity.this,
-					EscolherTampaActivity.class);
+			intentPista.putExtra("pista", "pista3");
 		}
 		startActivity(intentPista);
+
+
 	}
+
+	
 
 	public void setTodosButaoFalse() {
 		butaoPista1.setSelected(false);

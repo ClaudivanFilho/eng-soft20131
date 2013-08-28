@@ -1,5 +1,7 @@
 package com.me.mygdxgame;
 
+import java.io.File;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -25,6 +27,9 @@ public class Tampa {
 	private boolean checkPointComplete2 = false;
 	private boolean checkPointComplete3 = false;
 	private boolean checkPointComplete4 = false;
+
+	
+	
 	
 	public boolean isCheckPointComplete1() {
 		return checkPointComplete1;
