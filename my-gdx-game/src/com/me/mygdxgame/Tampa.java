@@ -25,9 +25,6 @@ public class Tampa {
 	private boolean checkPointComplete2 = false;
 	private boolean checkPointComplete3 = false;
 	private boolean checkPointComplete4 = false;
-
-	
-	
 	
 	public boolean isCheckPointComplete1() {
 		return checkPointComplete1;

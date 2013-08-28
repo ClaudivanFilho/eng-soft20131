@@ -23,7 +23,8 @@ public class MyContactListener implements ContactListener {
 
 	@Override
 	public void beginContact(Contact contact) {
-
+		//verifica se houve contato com a pista de alguma tampa.
+		contatoComAPista(contact);
 		isColisaoAtual = true;
 	}
 
@@ -40,7 +41,6 @@ public class MyContactListener implements ContactListener {
 					.equals("Tampa2")
 					|| x2.getBody().getUserData().equals("Tampa2");
 
-			contatoComAPista(x1, x2, isContatoComTampa1, isContatoComTampa2);
 			contatoComCheckPont1(x1, x2, isContatoComTampa1, isContatoComTampa2);
 			contatoComCheckPoint2(x1, x2, isContatoComTampa1,
 					isContatoComTampa2);
@@ -127,42 +127,14 @@ public class MyContactListener implements ContactListener {
 		}
 	}
 
-	private void contatoComAPista(final Fixture x1, final Fixture x2,
-			boolean isContatoComTampa1, boolean isContatoComTampa2) {
-		if (x1.getBody().getUserData() != null
-				&& x2.getBody().getUserData() != null) {
-
-			boolean isContatoComAPista = x1.getBody().getUserData()
-					.equals("Pista")
-					|| x2.getBody().getUserData().equals("Pista");
-			if (isContatoComAPista) {
-				if (isContatoComTampa1) {
-					atualizaResetTampa1();
-
-				} else if (isContatoComTampa2) {
-
-					atualizaResetTampa2();
-				}
-			}
-
+	private void contatoComAPista(Contact contact) {
+		if (contact.getFixtureA().getBody().getUserData().equals("Pista")
+				&& contact.getFixtureB().getBody().getUserData().equals("Tampa1")) {
+			world.getTampa1().setReset(true);
 		}
-	}
-
-	private void atualizaResetTampa2() {
-		if (tampa2.isReset()) {
-			tampa2.setReset(false);
-
-		} else {
-			tampa2.setReset(true);
-		}
-	}
-
-	private void atualizaResetTampa1() {
-		if (tampa1.isReset()) {
-			tampa1.setReset(false);
-
-		} else {
-			tampa1.setReset(true);
+		if (contact.getFixtureA().getBody().getUserData().equals("Pista")
+				&& contact.getFixtureB().getBody().getUserData().equals("Tampa2")) {
+			world.getTampa2().setReset(true);
 		}
 	}
 

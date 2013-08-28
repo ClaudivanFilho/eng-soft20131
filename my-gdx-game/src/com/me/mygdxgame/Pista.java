@@ -146,12 +146,12 @@ public class Pista {
 
 		// this is only one possible drawing out of many
 		TextureRegion region = new TextureRegion(texture, 0, 0, 720, 960);
-		spriteBatch.draw(region, 0,0,1024*Util.changeX(),1024*Util.changeY());
-		
+		//spriteBatch.draw(region, 0,0,1024*Util.changeX(),1024*Util.changeY());
+		sprite.setRegion(region);
 		// this is another one
 
 		// and a third...
-		// sprite.draw(spriteBatch, 100);
+		sprite.draw(spriteBatch, 100);
 		// sprite.draw(spriteBatch);
 
 		spriteBatch.end();

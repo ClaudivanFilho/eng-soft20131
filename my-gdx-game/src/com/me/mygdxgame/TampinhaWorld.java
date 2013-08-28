@@ -67,8 +67,6 @@ public class TampinhaWorld {
 		return pista;
 	}
 
-
-
 	public World getWorld() {
 		return world;
 	}
@@ -103,8 +101,6 @@ public class TampinhaWorld {
 			dragged.render();
 		}
 	}
-
-
 
 	private void desenhaVitoria(Tampa tampa) {
 		if(tampa.isRaceComplete()){
