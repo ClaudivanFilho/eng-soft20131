@@ -18,7 +18,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 public class Pista {
 	private TampinhaWorld world;
 	private Texture texture;
-	private String imageURL = "data" + File.separator + "pista2.png";
+	private String imageURL = "data" + File.separator + "pista.png";
 	private Sprite sprite;
 	private Body speedwayBody;
 	private SpriteBatch spriteBatch;
@@ -151,7 +151,7 @@ public class Pista {
 		// this is another one
 
 		// and a third...
-		sprite.draw(spriteBatch, 100);
+		sprite.draw(spriteBatch);
 		// sprite.draw(spriteBatch);
 
 		spriteBatch.end();

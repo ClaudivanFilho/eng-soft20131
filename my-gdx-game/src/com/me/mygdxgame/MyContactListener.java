@@ -50,18 +50,25 @@ public class MyContactListener implements ContactListener {
 					isContatoComTampa2);
 		}
 		isColisaoAtual = false;
-
 	}
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-
 	}
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
-		// TODO Auto-generated method stub
-
+	}
+	
+	private void contatoComAPista(Contact contact) {
+		if (contact.getFixtureA().getBody().getUserData().equals("Pista")
+				&& contact.getFixtureB().getBody().getUserData().equals("Tampa1")) {
+			world.getTampa1().setReset(true);
+		}
+		if (contact.getFixtureA().getBody().getUserData().equals("Pista")
+				&& contact.getFixtureB().getBody().getUserData().equals("Tampa2")) {
+			world.getTampa2().setReset(true);
+		}
 	}
 
 	private void contatoComCheckPoint4(final Fixture x1, final Fixture x2,
@@ -124,17 +131,6 @@ public class MyContactListener implements ContactListener {
 					vitoria();
 				}
 			}
-		}
-	}
-
-	private void contatoComAPista(Contact contact) {
-		if (contact.getFixtureA().getBody().getUserData().equals("Pista")
-				&& contact.getFixtureB().getBody().getUserData().equals("Tampa1")) {
-			world.getTampa1().setReset(true);
-		}
-		if (contact.getFixtureA().getBody().getUserData().equals("Pista")
-				&& contact.getFixtureB().getBody().getUserData().equals("Tampa2")) {
-			world.getTampa2().setReset(true);
 		}
 	}
 
