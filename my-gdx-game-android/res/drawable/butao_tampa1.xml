@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/tampa1_sel" android:state_selected="true"/>
-    <item android:drawable="@drawable/tampa1_icon"/>
+    <item android:drawable="@drawable/tampa1selec" android:state_selected="true"/>
+    <item android:drawable="@drawable/tampa1"/>
 
 </selector>

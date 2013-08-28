@@ -40,10 +40,10 @@ public final class R {
         public static final int pista_menu=0x7f020008;
         public static final int pista_menu_selected=0x7f020009;
         public static final int pista_menu_selected2=0x7f02000a;
-        public static final int tampa1_icon=0x7f02000b;
-        public static final int tampa1_sel=0x7f02000c;
-        public static final int tampa2_icon=0x7f02000d;
-        public static final int tampa2_sel=0x7f02000e;
+        public static final int tampa1=0x7f02000b;
+        public static final int tampa1selec=0x7f02000c;
+        public static final int tampa2=0x7f02000d;
+        public static final int tampa2selec=0x7f02000e;
         public static final int undo=0x7f02000f;
     }
     public static final class id {

@@ -61,6 +61,7 @@ public class EscolherTampaActivity extends Activity {
 
 	private void butaoTampa1() {
 		 butaoTampa1 = (Button) findViewById(R.id.butao_tampa1);
+		 //butaoTampa1.setBack(getResources().getAssets().open('tampa1.png'));
 		butaoTampa1.setOnClickListener(new OnClickListener() {
 
 			@Override
