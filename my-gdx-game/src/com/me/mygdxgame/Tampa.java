@@ -71,6 +71,9 @@ public class Tampa {
 		return reset;
 	}
 
+	public String getId(){
+		return this.id;
+	}
 	public void setReset(boolean reset) {
 		this.reset = reset;
 	}
@@ -113,7 +116,7 @@ public class Tampa {
 
 		// binding texture to sprite and setting some attributes
 		sprite = new Sprite(texture);
-		sprite.setSize(width*Util.changeX(), width*Util.changeY());
+		sprite.setSize(width*Util.changeX(), width*Util.changeX());
 		sprite.setPosition(circleBody.getPosition().x - 16,
 				circleBody.getPosition().y - 16);
 

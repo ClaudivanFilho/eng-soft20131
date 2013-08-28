@@ -1,4 +1,7 @@
 package com.me.mygdxgame;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -126,11 +129,18 @@ public class TampinhaWorld {
 		 * tampa1.getBody().getLinearVelocity().x + " Y: " +
 		 * tampa1.getBody().getLinearVelocity().x);
 		 */
-
+		
+		
+		
+		
 		paraTampa1((float) 2.5);
 		paraTampa2((float) 2.5);
 
 		pista.render();
+		System.out.println(tampa1.isRaceComplete() || tampa2.isRaceComplete());
+		desenhaVitoria(tampa1);
+		desenhaVitoria(tampa2);;
+
 		tampa1.render();
 		tampa2.render();
 		if (!flagStopTampa1 && !flagStopTampa2) {
@@ -140,6 +150,36 @@ public class TampinhaWorld {
 
 		if (dragged != null) {
 			dragged.render();
+		}
+	}
+
+
+
+	private void desenhaVitoria(Tampa tampa) {
+		if(tampa.isCheckPointComplete1()){
+			System.out.println("Entoru");
+			 SpriteBatch spriteBatch;
+		        BitmapFont font;
+		        CharSequence str = tampa.getId()+" Venceu!!!";
+		        spriteBatch = new SpriteBatch();
+		       
+		       
+		        font = new BitmapFont();
+		        float textWidth = font.getBounds(str).width; 
+		        
+		    	  float w = Gdx.graphics.getWidth();
+		    	  float h = Gdx.graphics.getHeight();
+		        
+		    	  int center = (int) ((w/2) - (textWidth/2));
+		    	  
+		        spriteBatch.begin();
+		        font.draw(spriteBatch, str, center, h/2);
+		        spriteBatch.end();
+		        
+		        if(!flagStopTampa1 && !flagStopTampa2 ){
+		    		Gdx.app.exit();
+
+		        }
 		}
 	}
 

@@ -12,6 +12,8 @@ public class Util {
 
 	
 
+	
+	
 	public static float changeX() {
 		if(p < h/w){
 			return  (w / wDefault)* p2;

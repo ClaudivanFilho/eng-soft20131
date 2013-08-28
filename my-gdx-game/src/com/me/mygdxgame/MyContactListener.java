@@ -35,8 +35,7 @@ public class MyContactListener implements ContactListener {
 			boolean isContatoComTampa1 = x1.getBody().getUserData()
 					.equals("Tampa1")
 					|| x2.getBody().getUserData().equals("Tampa1");
-			
-			
+
 			boolean isContatoComTampa2 = x1.getBody().getUserData()
 					.equals("Tampa2")
 					|| x2.getBody().getUserData().equals("Tampa2");
@@ -118,7 +117,7 @@ public class MyContactListener implements ContactListener {
 					vitoria();
 				}
 			} else if (isContatoComTampa2) {
-				vitoria() ;
+				vitoria();
 				tampa2.setCheckPointComplete1(true);
 				if (tampa2.isRaceComplete()) {
 					// Tampa 2 venceu
@@ -132,7 +131,7 @@ public class MyContactListener implements ContactListener {
 			boolean isContatoComTampa1, boolean isContatoComTampa2) {
 		if (x1.getBody().getUserData() != null
 				&& x2.getBody().getUserData() != null) {
-		
+
 			boolean isContatoComAPista = x1.getBody().getUserData()
 					.equals("Pista")
 					|| x2.getBody().getUserData().equals("Pista");
@@ -168,10 +167,10 @@ public class MyContactListener implements ContactListener {
 	}
 
 	private void vitoria() {
-		Gdx.app.exit();
 		Sound sound = Gdx.audio.newSound(Gdx.files
 				.internal("data/glass-ding.mp3"));
 		sound.play();
+		
 	}
 
 }
