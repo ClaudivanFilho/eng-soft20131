@@ -2,6 +2,9 @@ package com.me.mygdxgame;
 
 import java.io.File;
 
+import trialMode.CheckPointTrial;
+import trialMode.PistaTrial;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -55,14 +58,7 @@ public class TampinhaWorld {
 		this.gravity = new Vector2();
 		this.world = new World(gravity, true);
 		// Cria as duas tampas
-		Vector2 tampa1Position = new Vector2(80 * Util.changeX(),
-				564 * Util.changeY());
-		this.tampa1 = new Tampa(this, tampa1Position, "Tampa1",
-				this.urlImagemTampa1);
-		Vector2 tampa2Position = new Vector2(170 * Util.changeX(),
-				570 * Util.changeY());
-		this.tampa2 = new Tampa(this, tampa2Position, "Tampa2",
-				this.urlImagemTampa2);
+		criarTampas(pista);
 
 		tampaDaVez = tampa1;
 		// Cria a Pista
@@ -73,6 +69,33 @@ public class TampinhaWorld {
 		// Adding the contact listener
 		ContactListener listener = new MyContactListener(this);
 		world.setContactListener(listener);
+	}
+
+	private void criarTampas(String pista) {
+		Vector2 tampa1Position =null;
+		Vector2 tampa2Position = null ;
+		if (pista.equals("pista1")) {
+			tampa1Position = new Vector2(80 * Util.changeX(),
+					564 * Util.changeY());
+			tampa2Position = new Vector2(140 * Util.changeX(),
+					570 * Util.changeY());
+		}else if(pista.equals("pista2")){
+			tampa1Position = new Vector2(170 * Util.changeX(),
+					760 * Util.changeY());
+			tampa2Position = new Vector2(270 * Util.changeX(),
+					760 * Util.changeY());
+		}else if(pista.equals("pista3")){
+			tampa1Position = new Vector2(340f * Util.changeX(),
+					660 * Util.changeY());
+			tampa2Position = new Vector2(440 * Util.changeX(),
+					660 * Util.changeY());
+		}
+		
+		this.tampa1 = new Tampa(this, tampa1Position, "Tampa1",
+				this.urlImagemTampa1);
+	
+		this.tampa2 = new Tampa(this, tampa2Position, "Tampa2",
+				this.urlImagemTampa2);
 	}
 
 	private void criarPista(String pista) {
@@ -90,30 +113,31 @@ public class TampinhaWorld {
 					140f * Util.changeY(), 0.6f, 40f, "checkPoint3");
 			checkPoint4 = new CheckPoint(this, 808f * Util.changeX(),
 					140f * Util.changeY(), -0.5f, 40f, "checkPoint4");
-			this.pista = new Pista(this,"teste-body-editor1.json", "pista1.png" , checkPoint1, checkPoint2, checkPoint3,checkPoint4);
+		
+			this.pista = new Pista(this,"teste-body-editor1.json", "pista1.jpg" , checkPoint1, checkPoint2, checkPoint3,checkPoint4);
 		}
 		if (pista.equals("pista2")) {
-			checkPoint1 = new CheckPoint(this, 140f * Util.changeX(),
-					600f * Util.changeY(), 0.1f, 40f, "checkPoint1");
-			checkPoint2 = new CheckPoint(this, 780f * Util.changeX(),
-					840f * Util.changeY(), 0.5f, 40f, "checkPoint2");
-			checkPoint3 = new CheckPoint(this, 150f * Util.changeX(),
-					140f * Util.changeY(), 0.6f, 40f, "checkPoint3");
+			checkPoint1 = new CheckPoint(this, 230f * Util.changeX(),
+					800f * Util.changeY(), 0.0f, 40f, "checkPoint1");
+			checkPoint2 = new CheckPoint(this, 760f * Util.changeX(),
+					840f * Util.changeY(), 0.3f, 40f, "checkPoint2");
+			checkPoint3 = new CheckPoint(this, 200f * Util.changeX(),
+					190f * Util.changeY(), 0.6f, 40f, "checkPoint3");
 			checkPoint4 = new CheckPoint(this, 808f * Util.changeX(),
-					140f * Util.changeY(), -0.5f, 40f, "checkPoint4");
-			this.pista = new Pista(this, "teste-body-editor2.json", "pista2.png", checkPoint1, checkPoint2, checkPoint3,
+					160f * Util.changeY(), -1.2f, 40f, "checkPoint4");
+			this.pista = new Pista(this, "teste-body-editor2.json", "pista2.jpg", checkPoint1, checkPoint2, checkPoint3,
 					checkPoint4);
 		}
 		if (pista.equals("pista3")) {
-			checkPoint1 = new CheckPoint(this, 140f * Util.changeX(),
-					600f * Util.changeY(), 0.1f, 40f, "checkPoint1");
-			checkPoint2 = new CheckPoint(this, 780f * Util.changeX(),
+			checkPoint1 = new CheckPoint(this, 400f * Util.changeX(),
+					690f * Util.changeY(), 0.0f, 40f, "checkPoint1");
+			checkPoint2 = new CheckPoint(this, 620f * Util.changeX(),
 					840f * Util.changeY(), 0.5f, 40f, "checkPoint2");
-			checkPoint3 = new CheckPoint(this, 150f * Util.changeX(),
-					140f * Util.changeY(), 0.6f, 40f, "checkPoint3");
+			checkPoint3 = new CheckPoint(this, 400f * Util.changeX(),
+					300f * Util.changeY(), 0.6f, 40f, "checkPoint3");
 			checkPoint4 = new CheckPoint(this, 808f * Util.changeX(),
 					140f * Util.changeY(), -0.5f, 40f, "checkPoint4");
-			this.pista = new Pista(this, "teste-body-editor3.json", "pista3.png", checkPoint1, checkPoint2, checkPoint3,
+			this.pista = new Pista(this, "teste-body-editor3.json", "pista3.jpg", checkPoint1, checkPoint2, checkPoint3,
 					checkPoint4);
 		}
 

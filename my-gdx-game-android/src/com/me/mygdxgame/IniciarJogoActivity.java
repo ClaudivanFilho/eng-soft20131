@@ -21,11 +21,17 @@ public class IniciarJogoActivity extends AndroidApplication {
         String tampa1 = extras.getString("tampa1");
         String tampa2 = extras.getString("tampa2");
         String pista = extras.getString("pista");
+        String tipodejogo = extras.getString("tipodejogo");
         MyGdxGame novojogo;
         if(pista != null){
         	 novojogo =   new MyGdxGame(tampa1,tampa2,pista);
         }else{
         	novojogo =   new MyGdxGame(tampa1,tampa2);
+        }
+        if (tipodejogo.equals("time") || tipodejogo.equals("treinamento") ){
+        	novojogo.MODE = novojogo.TRIAL;
+        }else{
+        	novojogo.MODE = novojogo.NORMAL;
         }
         initialize(novojogo, cfg);
     }

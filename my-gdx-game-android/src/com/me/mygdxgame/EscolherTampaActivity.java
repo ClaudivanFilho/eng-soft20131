@@ -82,10 +82,12 @@ public class EscolherTampaActivity extends Activity {
 
 	private void iniciarJogo() {
 		 Bundle extras = getIntent().getExtras();
+		 String tipodejogo = extras.getString("tipodejogo");
 	     String pista = extras.getString("pista");
 		Intent iniciarJogo = new Intent(EscolherTampaActivity.this,
 		IniciarJogoActivity.class);
 		iniciarJogo.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		iniciarJogo.putExtra("tipodejogo",tipodejogo);
 		if(pista != null){iniciarJogo.putExtra("pista",pista);}
 		if (butaoTampa1.isSelected()) {
 			iniciarJogo.putExtra("tampa1", "tampa1.png");

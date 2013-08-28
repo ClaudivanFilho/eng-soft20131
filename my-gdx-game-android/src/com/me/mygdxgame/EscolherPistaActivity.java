@@ -119,7 +119,12 @@ public class EscolherPistaActivity extends Activity {
 	}
 
 	public void avancarParaJogo() {
-		intentPista = new Intent(EscolherPistaActivity.this,
+		
+		  
+        Bundle extras = getIntent().getExtras();
+        String tipodejogo = extras.getString("tipodejogo");
+	
+        intentPista = new Intent(EscolherPistaActivity.this,
 				EscolherTampaActivity.class);
 		if (butaoPista1.isSelected()) {
 			intentPista.putExtra("pista", "pista1");
@@ -128,6 +133,7 @@ public class EscolherPistaActivity extends Activity {
 		} else if (butaoPista3.isSelected()) {
 			intentPista.putExtra("pista", "pista3");
 		}
+		intentPista.putExtra("tipodejogo",tipodejogo );
 		startActivity(intentPista);
 
 

@@ -28,7 +28,11 @@ public class JogarActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				//time trial
+				if (intentEscolher == null) {
+					intentEscolher = new Intent(JogarActivity.this, EscolherPistaActivity.class);
+					intentEscolher.putExtra("tipodejogo", "time");
+				}
+				startActivity(intentEscolher);
 			}
 		});
 	}
@@ -39,7 +43,12 @@ public class JogarActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				//time trial
+				if (intentEscolher == null) {
+					intentEscolher = new Intent(JogarActivity.this, EscolherPistaActivity.class);
+					intentEscolher.putExtra("tipodejogo", "treinamento");
+
+				}
+				startActivity(intentEscolher);
 			}
 		});
 	}
@@ -63,6 +72,7 @@ public class JogarActivity extends Activity {
 				if (intentTampa == null) {
 					intentTampa = new Intent(JogarActivity.this, EscolherTampaActivity.class);
 					intentTampa.putExtra("pista", "pista1");
+					intentTampa.putExtra("tipodejogo", "campeonato");
 					intentTampa.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 
 				}
@@ -78,6 +88,8 @@ public class JogarActivity extends Activity {
 			public void onClick(View arg0) {
 				if (intentEscolher == null) {
 					intentEscolher = new Intent(JogarActivity.this, EscolherPistaActivity.class);
+					intentEscolher.putExtra("tipodejogo", "arcade");
+
 				}
 				startActivity(intentEscolher);
 			}

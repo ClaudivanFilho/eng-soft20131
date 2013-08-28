@@ -22,10 +22,10 @@ public class MyGdxGame implements ApplicationListener {
 	private String imageTampa2; 
 	private String pista;
 	
-	private static int TRIAL = 0;
-	private static int NORMAL = 1;
+	public  static int TRIAL = 0;
+	public static int NORMAL = 1;
 
-	private int MODE = TRIAL;
+	public int MODE = TRIAL;
 	
 	public MyGdxGame(String imageTampa1,String imageTampa2, String pista) {
 		this.imageTampa1 = "data" + File.separator + imageTampa1;
