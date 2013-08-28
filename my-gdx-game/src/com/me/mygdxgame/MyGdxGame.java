@@ -2,22 +2,30 @@ package com.me.mygdxgame;
 
 import java.io.File;
 
+import trialMode.GdxGameInputProcessorTrial;
+import trialMode.TampinhaTrialWorld;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 
 public class MyGdxGame implements ApplicationListener {
 	private TampinhaWorld tampinhaWorld;
 	private Box2DDebugRenderer debugRenderer;
+	
+	private TampinhaTrialWorld tampinhaWorldTrial;
 
 	public static OrthographicCamera camera;
 	private String imageTampa1; 
 	private String imageTampa2; 
-	private String pista; 
+	private String pista;
+	
+	private static int TRIAL = 0;
+	private static int NORMAL = 1;
 
+	private int MODE = TRIAL;
 	
 	public MyGdxGame(String imageTampa1,String imageTampa2, String pista) {
 		this.imageTampa1 = "data" + File.separator + imageTampa1;
@@ -36,13 +44,20 @@ public class MyGdxGame implements ApplicationListener {
 	public void create() {
 		//Camera settings
 		createCamera();
-		
-		//Create World
-		tampinhaWorld = new TampinhaWorld(imageTampa1,imageTampa2,pista);
-		
-		//Setting input processor
-		Gdx.input.setInputProcessor(new GdxGameInputProcessor(camera, tampinhaWorld));
-		
+		if (MODE == TRIAL) {
+			//Create World
+			tampinhaWorldTrial = new TampinhaTrialWorld(imageTampa1,pista);
+			
+			//Setting input processor
+			Gdx.input.setInputProcessor(new GdxGameInputProcessorTrial(camera, tampinhaWorldTrial));
+		} else {
+			//Create World
+			tampinhaWorld = new TampinhaWorld(imageTampa1,imageTampa2,pista);
+			
+			//Setting input processor
+			Gdx.input.setInputProcessor(new GdxGameInputProcessor(camera, tampinhaWorld));
+			
+		}
 		//Setting Rederer
 		debugRenderer = new Box2DDebugRenderer();
 	}
@@ -68,16 +83,17 @@ public class MyGdxGame implements ApplicationListener {
 	@Override
 	public void render() {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
-		debugRenderer.render(tampinhaWorld.getWorld(), camera.combined);
-		
-		tampinhaWorld.render();
+		if (MODE == TRIAL) {
+			debugRenderer.render(tampinhaWorldTrial.getWorld(), camera.combined);
+			tampinhaWorldTrial.render();
+		}else {
+			debugRenderer.render(tampinhaWorld.getWorld(), camera.combined);
+			tampinhaWorld.render();
+		}
 	}
 
 	@Override
-	public void resize(int width, int height) {
-		
-		
+	public void resize(int width, int height) {	
 	}
 
 	@Override
@@ -87,6 +103,4 @@ public class MyGdxGame implements ApplicationListener {
 	@Override
 	public void resume() {
 	}
-	
-	
 }
