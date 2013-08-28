@@ -137,7 +137,6 @@ public class TampinhaWorld {
 		paraTampa2((float) 2.5);
 
 		pista.render();
-		System.out.println(tampa1.isRaceComplete() || tampa2.isRaceComplete());
 		desenhaVitoria(tampa1);
 		desenhaVitoria(tampa2);;
 
@@ -156,8 +155,7 @@ public class TampinhaWorld {
 
 
 	private void desenhaVitoria(Tampa tampa) {
-		if(tampa.isCheckPointComplete1()){
-			System.out.println("Entoru");
+		if(tampa.isRaceComplete()){
 			 SpriteBatch spriteBatch;
 		        BitmapFont font;
 		        CharSequence str = tampa.getId()+" Venceu!!!";

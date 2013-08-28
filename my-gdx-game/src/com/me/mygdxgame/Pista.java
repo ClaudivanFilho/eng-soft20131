@@ -39,7 +39,7 @@ public class Pista {
 	
 	public void initCheckPoints(){
 		// check point
-				 checkPoint1 = new CheckPoint(this.world,140f* Util.changeX(), 700f* Util.changeY(), 0.1f, 40f,"checkPoint1");
+				 checkPoint1 = new CheckPoint(this.world,140f* Util.changeX(), 600f* Util.changeY(), 0.1f, 40f,"checkPoint1");
 				 checkPoint2 = new CheckPoint(this.world,780f* Util.changeX(), 840f* Util.changeY(), 0.5f, 40f,"checkPoint2");
 				 checkPoint3 = new CheckPoint(this.world,150f* Util.changeX(), 140f* Util.changeY(), 0.6f, 40f,"checkPoint3");
 				 checkPoint4 = new CheckPoint(this.world,808f* Util.changeX(), 140f* Util.changeY(), -0.5f, 40f,"checkPoint4");
