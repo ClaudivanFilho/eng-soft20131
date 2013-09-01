@@ -157,8 +157,7 @@ public class TampinhaWorld {
 	}
 
 	public MouseJoint createMouseJoint(Body tampaBody) {
-		tampa1PositionTemp = new Vector2(tampa1.getBody().getPosition());
-		tampa2PositionTemp = new Vector2(tampa2.getBody().getPosition());
+	
 		if (mouseJoint != null) {
 			world.destroyJoint(mouseJoint);
 		}
@@ -218,6 +217,8 @@ public class TampinhaWorld {
 		}
 
 		if (dragged != null) {
+			tampa1PositionTemp = new Vector2(tampa1.getBody().getPosition());
+			tampa2PositionTemp = new Vector2(tampa2.getBody().getPosition());
 			dragged.render();
 		}
 	}
